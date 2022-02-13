@@ -12,7 +12,7 @@ function MoviePage(): JSX.Element {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header />
+          <Header pageLink='main.html'/>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -127,7 +127,7 @@ function MoviePage(): JSX.Element {
           </div>
         </section>
 
-        <Footer />
+        <Footer pageLink='main.html'/>
       </div>
     </>
   );
