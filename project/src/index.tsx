@@ -114,10 +114,9 @@ const films = [
 ReactDOM.render(
   <React.StrictMode>
     <App
-      promoFilmName = {promoFilm.name}
-      promoFilmGenre = {promoFilm.genre}
-      promoFilmYear = {promoFilm.year}
-      films = {films}
+      promoFilmName ={promoFilm.name}
+      promoFilmGenre ={promoFilm.genre}
+      promoFilmYear ={promoFilm.year}
+      films ={films}
     />
-  </React.StrictMode>,
-  document.getElementById('root'));
+  </React.StrictMode>, document.getElementById('root'));

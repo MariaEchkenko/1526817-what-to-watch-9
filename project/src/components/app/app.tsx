@@ -1,23 +1,20 @@
-import MainPage from '../main-page/main-page';
+import MainPage from '../../pages/main-page/main-page';
+import {Movies} from '../../types/movie';
 
 type AppProps = {
   promoFilmName: string;
   promoFilmGenre: string;
   promoFilmYear: number;
-  films: {
-    id: number;
-    name: string;
-    previewImage: string;
-  }[];
+  films: Movies;
 }
 
 function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): JSX.Element {
   return (
     <MainPage
-      promoFilmName= {promoFilmName}
-      promoFilmGenre= {promoFilmGenre}
-      promoFilmYear= {promoFilmYear}
-      films = {films}
+      promoFilmName={promoFilmName}
+      promoFilmGenre={promoFilmGenre}
+      promoFilmYear={promoFilmYear}
+      films={films}
     />
   );
 }
