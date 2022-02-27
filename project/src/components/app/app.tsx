@@ -6,6 +6,7 @@ import MyList from '../../pages/my-list/my-list';
 import MoviePage from '../../pages/movie-page/movie-page';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import {Movies} from '../../types/movie';
 
 type AppProps = {
@@ -49,6 +50,10 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
         <Route
           path={AppRoute.Player}
           element={<Player />}
+        />
+        <Route
+          path="*"
+          element={<NotFoundPage />}
         />
       </Routes>
     </BrowserRouter>
