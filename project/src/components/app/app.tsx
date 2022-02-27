@@ -1,4 +1,11 @@
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {AppRoute} from '../../const';
 import MainPage from '../../pages/main-page/main-page';
+import SignIn from '../../pages/sign-in/sign-in';
+import MyList from '../../pages/my-list/my-list';
+import MoviePage from '../../pages/movie-page/movie-page';
+import AddReview from '../../pages/add-review/add-review';
+import Player from '../../pages/player/player';
 import {Movies} from '../../types/movie';
 
 type AppProps = {
@@ -10,12 +17,41 @@ type AppProps = {
 
 function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): JSX.Element {
   return (
-    <MainPage
-      promoFilmName={promoFilmName}
-      promoFilmGenre={promoFilmGenre}
-      promoFilmYear={promoFilmYear}
-      films={films}
-    />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppRoute.Main}
+          element={
+            <MainPage
+              promoFilmName={promoFilmName}
+              promoFilmGenre={promoFilmGenre}
+              promoFilmYear={promoFilmYear}
+              films={films}
+            />
+          }
+        />
+        <Route
+          path={AppRoute.SignIn}
+          element={<SignIn />}
+        />
+        <Route
+          path={AppRoute.MyList}
+          element={<MyList />}
+        />
+        <Route
+          path={AppRoute.Film}
+          element={<MoviePage />}
+        />
+        <Route
+          path={AppRoute.AddReview}
+          element={<AddReview />}
+        />
+        <Route
+          path={AppRoute.Player}
+          element={<Player />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
