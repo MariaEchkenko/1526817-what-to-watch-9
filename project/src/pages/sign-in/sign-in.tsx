@@ -5,7 +5,7 @@ function SignIn(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <Logo pageLink='main.html'/>
+        <Logo />
 
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
@@ -28,7 +28,7 @@ function SignIn(): JSX.Element {
         </form>
       </div>
 
-      <Footer pageLink='main.html' />
+      <Footer />
     </div>
   );
 }
