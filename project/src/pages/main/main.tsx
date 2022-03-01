@@ -6,14 +6,14 @@ import ButtonShowMore from '../../components/button-show-more/button-show-more';
 import Footer from '../../components/footer/footer';
 import {Movies} from '../../types/movie';
 
-type MainPageProps = {
+type MainProps = {
   promoFilmName: string;
   promoFilmGenre: string;
   promoFilmYear: number;
   films: Movies;
 }
 
-function MainPage({promoFilmName, promoFilmGenre, promoFilmYear, films}: MainPageProps): JSX.Element {
+function Main({promoFilmName, promoFilmGenre, promoFilmYear, films}: MainProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -60,4 +60,4 @@ function MainPage({promoFilmName, promoFilmGenre, promoFilmYear, films}: MainPag
   );
 }
 
-export default MainPage;
+export default Main;

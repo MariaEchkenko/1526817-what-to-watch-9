@@ -1,12 +1,12 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import MainPage from '../../pages/main-page/main-page';
+import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
-import MoviePage from '../../pages/movie-page/movie-page';
+import Movie from '../../pages/movie/movie';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
-import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import {Movies} from '../../types/movie';
 
@@ -24,7 +24,7 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
         <Route
           path={AppRoute.Main}
           element={
-            <MainPage
+            <Main
               promoFilmName={promoFilmName}
               promoFilmGenre={promoFilmGenre}
               promoFilmYear={promoFilmYear}
@@ -47,8 +47,8 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
           }
         />
         <Route path={AppRoute.Film}>
-          <Route index element={<MoviePage />} />
-          <Route path=':id' element={<MoviePage />} />
+          <Route index element={<Movie />} />
+          <Route path=':id' element={<Movie />} />
           <Route path=':id/review' element={<AddReview />} />
         </Route>
         <Route path={AppRoute.Player}>
@@ -57,7 +57,7 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
         </Route>
         <Route
           path="*"
-          element={<NotFoundPage />}
+          element={<NotFound />}
         />
       </Routes>
     </BrowserRouter>
