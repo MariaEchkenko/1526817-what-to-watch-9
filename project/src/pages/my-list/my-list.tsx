@@ -6,7 +6,7 @@ function MyList(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <Logo pageLink='main.html' />
+        <Logo />
 
         <h1 className="page-title user-page__title">My list</h1>
 
@@ -102,7 +102,7 @@ function MyList(): JSX.Element {
         </div>
       </section>
 
-      <Footer pageLink='main.html' />
+      <Footer />
 
     </div>
   );

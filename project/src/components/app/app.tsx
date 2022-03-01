@@ -1,4 +1,13 @@
-import MainPage from '../../pages/main-page/main-page';
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import Main from '../../pages/main/main';
+import SignIn from '../../pages/sign-in/sign-in';
+import MyList from '../../pages/my-list/my-list';
+import Movie from '../../pages/movie/movie';
+import AddReview from '../../pages/add-review/add-review';
+import Player from '../../pages/player/player';
+import NotFound from '../../pages/not-found/not-found';
+import PrivateRoute from '../private-route/private-route';
 import {Movies} from '../../types/movie';
 
 type AppProps = {
@@ -10,12 +19,48 @@ type AppProps = {
 
 function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): JSX.Element {
   return (
-    <MainPage
-      promoFilmName={promoFilmName}
-      promoFilmGenre={promoFilmGenre}
-      promoFilmYear={promoFilmYear}
-      films={films}
-    />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppRoute.Main}
+          element={
+            <Main
+              promoFilmName={promoFilmName}
+              promoFilmGenre={promoFilmGenre}
+              promoFilmYear={promoFilmYear}
+              films={films}
+            />
+          }
+        />
+        <Route
+          path={AppRoute.SignIn}
+          element={<SignIn />}
+        />
+        <Route
+          path={AppRoute.MyList}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.NoAuth}
+            >
+              <MyList />
+            </PrivateRoute>
+          }
+        />
+        <Route path={AppRoute.Film}>
+          <Route index element={<Movie />} />
+          <Route path=':id' element={<Movie />} />
+          <Route path=':id/review' element={<AddReview />} />
+        </Route>
+        <Route path={AppRoute.Player}>
+          <Route index element={<Player />} />
+          <Route path=':id' element={<Player />} />
+        </Route>
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -12,7 +12,7 @@ function AddReview(): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <Logo pageLink='main.html'/>
+          <Logo />
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
