@@ -1,11 +1,13 @@
 type FilmCardProps = {
+  id: number,
   filmName: string;
   filmImage: string;
+  onHover: (id: number) => void;
 }
 
-function FilmCard({filmName, filmImage}: FilmCardProps): JSX.Element {
+function FilmCard({id, filmName, filmImage, onHover}: FilmCardProps): JSX.Element {
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card" onMouseEnter={() => onHover(id)}>
       <div className="small-film-card__image">
         <img src={filmImage} alt={filmName} width="280" height="175" />
       </div>
