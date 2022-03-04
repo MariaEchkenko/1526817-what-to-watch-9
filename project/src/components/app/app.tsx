@@ -40,7 +40,7 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
           path={AppRoute.MyList}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={AuthorizationStatus.NoAuth}
             >
               <MyList films={films}/>
             </PrivateRoute>
