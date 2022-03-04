@@ -22,7 +22,7 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
           onHover={handleFilmHover}
         />
       ))}
-      <h1>{activeFilm}</h1>
+      <h1 className="visually-hidden">{activeFilm}</h1> {/*Добавила пока,чтобы не крашилась сборка*/}
     </div>
   );
 }
