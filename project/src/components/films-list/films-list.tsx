@@ -9,7 +9,7 @@ type FilmsListProps = {
 function FilmsList({films}: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState(0);
 
-  const filmHoverHandler = (id: number): void => setActiveFilm(id);
+  const handleFilmHover = (id: number): void => setActiveFilm(id);
 
   return (
     <div className="catalog__films-list">
@@ -19,7 +19,7 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
           id={film.id}
           filmName={film.name}
           filmImage={film.previewImage}
-          onHover={filmHoverHandler}
+          onHover={handleFilmHover}
         />
       ))}
       <h1>{activeFilm}</h1>

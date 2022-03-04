@@ -42,18 +42,18 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyList films={films} />
+              <MyList films={films}/>
             </PrivateRoute>
           }
         />
         <Route path={AppRoute.Film}>
           <Route index element={<Movie />} />
           <Route path=':id' element={<Movie />} />
-          <Route path=':id/review' element={<AddReview />} />
+          <Route path=':id/review' element={<AddReview film={films[0]}/>} />
         </Route>
         <Route path={AppRoute.Player}>
-          <Route index element={<Player />} />
-          <Route path=':id' element={<Player />} />
+          <Route index element={<Player film={films[0]}/>} />
+          <Route path=':id' element={<Player film={films[0]}/>} />
         </Route>
         <Route
           path="*"
