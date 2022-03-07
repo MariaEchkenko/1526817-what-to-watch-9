@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import RatingItem from '../rating-item/rating-item';
 
-const RATING_ITEMS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+//const RATING_ITEMS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
 function AddReviewForm(): JSX.Element {
   const [rating, setRating] = useState(0);
-  const [reviewText, setReviewText] = useState('');
+  const [review, setReview] = useState('');
 
   const handleInputChange = (item: number): void => setRating(item);
 
@@ -13,13 +13,13 @@ function AddReviewForm(): JSX.Element {
     <form action="#" className="add-review__form">
       <div className="rating">
         <div className="rating__stars">
-          {RATING_ITEMS.map((item) => (
+          {Array.from({length:10}, (k, i) => (
             <RatingItem
-              key={item}
-              item={item}
-              onChecked={handleInputChange}
+              key={i+1}
+              item={i+1}
+              onRatingChange={handleInputChange}
             />
-          ))}
+          )).reverse()}
         </div>
       </div>
       <h1 className="visually-hidden">{rating}</h1> {/*Добавила пока,чтобы не крашилась сборка*/}
@@ -30,8 +30,8 @@ function AddReviewForm(): JSX.Element {
           name="review-text"
           id="review-text"
           placeholder="Review text"
-          value={reviewText}
-          onChange={(evt) => setReviewText(evt.target.value)}
+          value={review}
+          onChange={(evt) => setReview(evt.target.value)}
         >
         </textarea>
         <div className="add-review__submit">

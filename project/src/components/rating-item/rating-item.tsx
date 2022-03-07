@@ -1,9 +1,9 @@
 type RatingItemProps = {
   item: number;
-  onChecked: (item: number) => void;
+  onRatingChange: (item: number) => void;
 }
 
-function RatingItem({item, onChecked}: RatingItemProps): JSX.Element {
+function RatingItem({item, onRatingChange}: RatingItemProps): JSX.Element {
   return (
     <>
       <input
@@ -12,7 +12,7 @@ function RatingItem({item, onChecked}: RatingItemProps): JSX.Element {
         type="radio"
         name="rating"
         value={item}
-        onChange={() => onChecked(item)}
+        onChange={() => onRatingChange(item)}
       />
       <label className="rating__label" htmlFor={`star-${item}`}>
         {`Rating ${item}`}
