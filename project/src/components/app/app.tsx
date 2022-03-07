@@ -47,13 +47,13 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
           }
         />
         <Route path={AppRoute.Film}>
-          <Route index element={<Movie />} />
-          <Route path=':id' element={<Movie />} />
-          <Route path=':id/review' element={<AddReview film={films[0]}/>} />
+          <Route index element={<Movie films={films}/>} />
+          <Route path=':id' element={<Movie films={films}/>} />
+          <Route path=':id/review' element={<AddReview films={films}/>} />
         </Route>
         <Route path={AppRoute.Player}>
-          <Route index element={<Player film={films[0]}/>} />
-          <Route path=':id' element={<Player film={films[0]}/>} />
+          <Route index element={<Player films={films}/>} />
+          <Route path=':id' element={<Player films={films}/>} />
         </Route>
         <Route
           path="*"
