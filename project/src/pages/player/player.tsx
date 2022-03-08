@@ -1,7 +1,21 @@
-function Player(): JSX.Element {
+import { useParams } from 'react-router-dom';
+import { Movies} from '../../types/movie';
+import NotFound from '../../pages/not-found/not-found';
+
+type PlayerProps = {
+  films: Movies;
+}
+
+function Player({films}: PlayerProps): JSX.Element {
+  const {id} = useParams();
+  const movie = films.find((film) => film.id === Number(id));
+  if(!movie) {
+    return <NotFound />;
+  }
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={movie.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button type="button" className="player__exit">Exit</button>
 
