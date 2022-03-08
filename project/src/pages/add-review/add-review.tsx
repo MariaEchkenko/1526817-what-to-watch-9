@@ -1,20 +1,19 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Movies } from '../../types/movie';
 import Logo from '../../components/logo/logo';
 import UserNav from '../../components/user-nav/user-nav';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
-import NotFound from '../../pages/not-found/not-found';
 
 type AddReviewProps = {
   films: Movies;
 }
 
 function AddReview({films}: AddReviewProps): JSX.Element {
-  const {id} = useParams();
+  const { id } = useParams();
   const movie = films.find((film) => film.id === Number(id));
-  if(!movie) {
-    return <NotFound />;
+  if (!movie) {
+    return <Navigate to={AppRoute.Main} />;
   }
 
   return (

@@ -1,20 +1,19 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Movies } from '../../types/movie';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
-import NotFound from '../../pages/not-found/not-found';
 
 type MovieProps = {
   films: Movies;
 }
 
 function Movie({films}: MovieProps): JSX.Element {
-  const {id} = useParams();
+  const { id } = useParams();
   const movie = films.find((film) => film.id === Number(id));
-  if(!movie) {
-    return <NotFound />;
+  if (!movie) {
+    return <Navigate to={AppRoute.Main} />;
   }
 
   return (
