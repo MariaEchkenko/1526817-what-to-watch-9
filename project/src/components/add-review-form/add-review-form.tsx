@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import RatingItem from '../rating-item/rating-item';
 
-//const RATING_ITEMS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-
 function AddReviewForm(): JSX.Element {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
   const handleInputChange = (item: number): void => setRating(item);
+
+  const isDisabled = (review.length < 50 || review.length > 400) || rating === 0;
 
   return (
     <form action="#" className="add-review__form">
@@ -22,7 +22,6 @@ function AddReviewForm(): JSX.Element {
           )).reverse()}
         </div>
       </div>
-      <h1 className="visually-hidden">{rating}</h1> {/*Добавила пока,чтобы не крашилась сборка*/}
 
       <div className="add-review__text">
         <textarea
@@ -35,7 +34,7 @@ function AddReviewForm(): JSX.Element {
         >
         </textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={isDisabled}>Post</button>
         </div>
 
       </div>
