@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom';
-import {LogoMod} from '../../types/logo';
-import {AppRoute} from '../../const';
+import { Link } from 'react-router-dom';
+import { LogoMod } from '../../types/logo';
+import { AppRoute } from '../../const';
 
 type LogoProps = LogoMod;
 
