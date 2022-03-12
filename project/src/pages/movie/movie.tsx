@@ -12,6 +12,7 @@ type MovieProps = {
 function Movie({films}: MovieProps): JSX.Element {
   const { id } = useParams();
   const movie = films.find((film) => film.id === Number(id));
+
   if (!movie) {
     return <Navigate to={AppRoute.Main} />;
   }
