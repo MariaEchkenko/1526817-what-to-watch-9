@@ -15,7 +15,7 @@ function FilmReviews({reviews}: FilmReviewsProps): JSX.Element {
       <div className="film-card__reviews-col">
         {reviewsFirstCol.map((review) => (
           <Review
-            key = {review.id}
+            key = {review.user.id}
             review = {review}
           />
         ))}
@@ -23,7 +23,7 @@ function FilmReviews({reviews}: FilmReviewsProps): JSX.Element {
       <div className="film-card__reviews-col">
         {reviewsSecondCol.map((review) => (
           <Review
-            key = {review.id}
+            key = {review.user.id}
             review = {review}
           />
         ))}
