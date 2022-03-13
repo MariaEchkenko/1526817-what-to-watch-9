@@ -1,16 +1,16 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { Movies} from '../../types/movie';
-import NotFound from '../../pages/not-found/not-found';
 
 type PlayerProps = {
   films: Movies;
 }
 
 function Player({films}: PlayerProps): JSX.Element {
-  const {id} = useParams();
+  const { id } = useParams();
   const movie = films.find((film) => film.id === Number(id));
-  if(!movie) {
-    return <NotFound />;
+  if (!movie) {
+    return <Navigate to={AppRoute.Main} />;
   }
 
   return (

@@ -3,6 +3,7 @@
 * Студент: [Мария Эчкенко](https://up.htmlacademy.ru/react/9/user/1526817).
 * Наставник: [Алексей Хабиров](https://htmlacademy.ru/profile/alex_khab).
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/54531536ce2beeb8ab91/maintainability)](https://codeclimate.com/github/MariaEchkenko/1526817-what-to-watch-9/maintainability)
 ---
 
 _Не удаляйте и не изменяйте папки и файлы:_

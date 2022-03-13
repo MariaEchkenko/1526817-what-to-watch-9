@@ -2,7 +2,7 @@ import Logo from '../../components/logo/logo';
 import UserNav from '../../components/user-nav/user-nav';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
-import {Movies} from '../../types/movie';
+import { Movies } from '../../types/movie';
 
 type MyListProps = {
   films: Movies;

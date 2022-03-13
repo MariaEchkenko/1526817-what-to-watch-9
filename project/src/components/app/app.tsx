@@ -8,7 +8,7 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import {Movies} from '../../types/movie';
+import { Movies } from '../../types/movie';
 
 type AppProps = {
   promoFilmName: string;
