@@ -4,6 +4,7 @@ import { Movie } from '../../types/movie';
 import FilmOverview from '../../components/film-overview/film-overview';
 import FilmDetails from '../../components/film-details/film-details';
 import FilmReviews from '../../components/film-reviews/film-reviews';
+import classNames from 'classnames';
 
 const getComponentByTab = (activeTab: number, film: Movie) => {
   switch (activeTab) {
@@ -50,7 +51,10 @@ function Tabs({film}: TabsProps): JSX.Element {
           {tabs.map((tab) => (
             <li
               key={tab.id}
-              className={`film-nav__item ${tab.id === activeTab ? 'film-nav__item--active' : ''}`}
+              className={classNames({
+                'film-nav__item': true,
+                'film-nav__item--active': tab.id === activeTab,
+              })}
               onClick={() => setActiveTab(tab.id)}
             >
               <Link to={'#'} className="film-nav__link">{tab.title}</Link>
