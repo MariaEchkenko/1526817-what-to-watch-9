@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { Comment } from '../../types/comment';
 
 type ReviewProps = {
@@ -5,6 +6,9 @@ type ReviewProps = {
 }
 
 function Review({review}: ReviewProps): JSX.Element {
+  const attributeDate = dayjs(review.date).format('YYYY-MM-DD');
+  const reviewDate = dayjs(review.date).format('MMMM DD, YYYY');
+
   return (
     <div className="review">
       <blockquote className="review__quote">
@@ -12,7 +16,7 @@ function Review({review}: ReviewProps): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
-          <time className="review__date" dateTime={review.date}>{review.date}</time>
+          <time className="review__date" dateTime={attributeDate}>{reviewDate}</time>
         </footer>
       </blockquote>
 

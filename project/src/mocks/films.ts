@@ -98,7 +98,7 @@ export const films: Movies = [
       },
       {
         comment: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
-        date: 'Fri Mar 11 2022 20:23:55 GMT+0300 (Москва, стандартное время)',
+        date: 'Sat Mar 19 2022 07:13:13 GMT+0300 (Москва, стандартное время)',
         id: 2,
         rating: 8.0,
         user: {
@@ -142,7 +142,7 @@ export const films: Movies = [
     review: [
       {
         comment: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
-        date: 'Fri Mar 11 2022 20:23:55 GMT+0300 (Москва, стандартное время)',
+        date: 'Sat Mar 19 2022 07:13:13 GMT+0300 (Москва, стандартное время)',
         id: 3,
         rating: 8.9,
         user: {
@@ -162,7 +162,7 @@ export const films: Movies = [
       },
       {
         comment: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        date: 'Fri Mar 11 2022 20:23:55 GMT+0300 (Москва, стандартное время)',
+        date: 'Sat Mar 19 2022 07:13:13 GMT+0300 (Москва, стандартное время)',
         id: 3,
         rating: 7.6,
         user: {
@@ -236,7 +236,7 @@ export const films: Movies = [
       },
       {
         comment: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        date: 'Fri Mar 11 2022 20:23:55 GMT+0300 (Москва, стандартное время)',
+        date: 'Sat Mar 19 2022 07:13:13 GMT+0300 (Москва, стандартное время)',
         id: 4,
         rating: 7.6,
         user: {
@@ -309,7 +309,7 @@ export const films: Movies = [
       },
       {
         comment: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
-        date: 'Fri Mar 11 2022 20:23:55 GMT+0300 (Москва, стандартное время)',
+        date: 'Sat Mar 19 2022 07:13:13 GMT+0300 (Москва, стандартное время)',
         id: 5,
         rating: 8.0,
         user: {
@@ -363,7 +363,7 @@ export const films: Movies = [
       },
       {
         comment: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
-        date: 'Fri Mar 11 2022 20:23:55 GMT+0300 (Москва, стандартное время)',
+        date: 'Sat Mar 19 2022 07:13:13 GMT+0300 (Москва, стандартное время)',
         id: 6,
         rating: 8.0,
         user: {
@@ -471,7 +471,7 @@ export const films: Movies = [
     review: [
       {
         comment: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
-        date: 'Fri Mar 11 2022 20:23:55 GMT+0300 (Москва, стандартное время)',
+        date: 'Sat Mar 19 2022 07:13:13 GMT+0300 (Москва, стандартное время)',
         id: 8,
         rating: 8.9,
         user: {
