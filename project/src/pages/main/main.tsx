@@ -4,7 +4,7 @@ import GenreList from '../../components/genre-list/genre-list';
 import FilmsList from '../../components/films-list/films-list';
 import ButtonShowMore from '../../components/button-show-more/button-show-more';
 import Footer from '../../components/footer/footer';
-import {Movies} from '../../types/movie';
+import { Movies } from '../../types/movie';
 
 type MainProps = {
   promoFilmName: string;

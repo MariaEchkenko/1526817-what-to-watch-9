@@ -4,6 +4,7 @@ import { Movies } from '../../types/movie';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
+import Tabs from '../../components/tabs/tabs';
 
 type MovieProps = {
   films: Movies;
@@ -63,35 +64,7 @@ function Movie({films}: MovieProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{movie.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{movie.scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{movie.description}</p>
-
-                <p className="film-card__director"><strong>Director: {movie.director}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {movie.starring.join(', ')}</strong></p>
-              </div>
+              <Tabs film={movie}/>
             </div>
           </div>
         </div>
