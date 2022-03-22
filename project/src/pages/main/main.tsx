@@ -48,7 +48,7 @@ function Main({promoFilmName, promoFilmGenre, promoFilmYear, films}: MainProps):
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList />
+          <GenreList films={films} />
           <FilmsList films={films}/>
           <ButtonShowMore />
 

@@ -1,36 +1,34 @@
-function GenreList(): JSX.Element {
+import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/';
+import { changeGenre } from '../../store/action';
+import { Movies } from '../../types/movie';
+import classNames from 'classnames';
+
+type GenreListProps = {
+  films: Movies;
+}
+
+function GenreList({films}: GenreListProps): JSX.Element {
+  const genre = useAppSelector((state) => state.genre);
+  const dispatch = useAppDispatch();
+
+  const genres = films.map((film) => film.genre);
+  genres.unshift('All genres');
+  const uniqueGenres = [...new Set(genres)];
+
   return (
     <ul className="catalog__genres-list">
-      <li className="catalog__genres-item catalog__genres-item--active">
-        <a href="/" className="catalog__genres-link">All genres</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Comedies</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Crime</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Documentary</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Dramas</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Horror</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Kids & Family</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Romance</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Sci-Fi</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href="/" className="catalog__genres-link">Thrillers</a>
-      </li>
+      {uniqueGenres.map((uniqueGenre) => (
+        <li
+          key={uniqueGenre}
+          className={classNames('catalog__genres-item', {
+            'catalog__genres-item--active': uniqueGenre === genre,
+          })}
+          onClick={() => dispatch(changeGenre(uniqueGenre))}
+        >
+          <Link to="#" className="catalog__genres-link">{uniqueGenre}</Link>
+        </li>
+      ))}
     </ul>
   );
 }
