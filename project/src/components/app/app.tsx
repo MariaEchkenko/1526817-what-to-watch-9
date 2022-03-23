@@ -28,7 +28,6 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear, films}: AppProps): J
               promoFilmName={promoFilmName}
               promoFilmGenre={promoFilmGenre}
               promoFilmYear={promoFilmYear}
-              films={films}
             />
           }
         />

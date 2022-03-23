@@ -14,12 +14,12 @@ const promoFilm = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store = {store}>
+    <Provider store={store}>
       <App
-        promoFilmName ={promoFilm.name}
-        promoFilmGenre ={promoFilm.genre}
-        promoFilmYear ={promoFilm.year}
-        films ={films}
+        promoFilmName={promoFilm.name}
+        promoFilmGenre={promoFilm.genre}
+        promoFilmYear={promoFilm.year}
+        films={films}
       />
     </Provider>
   </React.StrictMode>, document.getElementById('root'));
