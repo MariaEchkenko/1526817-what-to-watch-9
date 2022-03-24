@@ -1,32 +1,31 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/';
-import { changeGenre } from '../../store/action';
-import { Movies } from '../../types/movie';
+import { useAppDispatch } from '../../hooks/';
+import { changeGenre, resetFilmCount } from '../../store/action';
 import classNames from 'classnames';
 
+
 type GenreListProps = {
-  films: Movies;
+  activeGenre: string;
+  genres: string[];
 }
 
-function GenreList({films}: GenreListProps): JSX.Element {
-  const genre = useAppSelector((state) => state.genre);
+function GenreList({activeGenre, genres}: GenreListProps): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const genres = films.map((film) => film.genre);
-  genres.unshift('All genres');
-  const uniqueGenres = [...new Set(genres)];
 
   return (
     <ul className="catalog__genres-list">
-      {uniqueGenres.map((uniqueGenre) => (
+      {genres.map((genre) => (
         <li
-          key={uniqueGenre}
+          key={genre}
           className={classNames('catalog__genres-item', {
-            'catalog__genres-item--active': uniqueGenre === genre,
+            'catalog__genres-item--active': genre === activeGenre,
           })}
-          onClick={() => dispatch(changeGenre(uniqueGenre))}
+          onClick={() => {
+            dispatch(resetFilmCount());
+            dispatch(changeGenre(genre));
+          }}
         >
-          <Link to="#" className="catalog__genres-link">{uniqueGenre}</Link>
+          <Link to="#" className="catalog__genres-link">{genre}</Link>
         </li>
       ))}
     </ul>
