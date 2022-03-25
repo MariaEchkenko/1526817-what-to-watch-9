@@ -1,14 +1,11 @@
+import { useAppSelector } from '../../hooks/';
 import Logo from '../../components/logo/logo';
 import UserNav from '../../components/user-nav/user-nav';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
-import { Movies } from '../../types/movie';
 
-type MyListProps = {
-  films: Movies;
-}
-
-function MyList({films}: MyListProps): JSX.Element {
+function MyList(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   const favoriteFilms = films.filter((film) => film.isFavorite);
 
   return (

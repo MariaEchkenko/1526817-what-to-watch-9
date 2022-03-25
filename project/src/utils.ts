@@ -1,4 +1,5 @@
 import { Movies } from './types/movie';
+import { AuthorizationStatus } from './const';
 
 export const createGenresList = (films: Movies) => {
   const genres = films.map((film) => film.genre);
@@ -6,3 +7,6 @@ export const createGenresList = (films: Movies) => {
 
   return uniqueGenres;
 };
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;

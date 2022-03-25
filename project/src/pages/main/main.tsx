@@ -15,9 +15,9 @@ type MainProps = {
 }
 
 function Main({promoFilmName, promoFilmGenre, promoFilmYear}: MainProps): JSX.Element {
-  const films = useAppSelector((state) => state.allFilms);
+  const films = useAppSelector((state) => state.films);
   const activeGenre = useAppSelector((state) => state.genre);
-  const stepFilms = useAppSelector((state) => state.stepFilms);
+  const renderedFilms = useAppSelector((state) => state.renderedFilms);
 
   const uniqueGenres = createGenresList(films);
 
@@ -60,8 +60,8 @@ function Main({promoFilmName, promoFilmGenre, promoFilmYear}: MainProps): JSX.El
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenreList activeGenre={activeGenre} genres={uniqueGenres} />
-          <FilmsList films={selectedFilms.slice(0, stepFilms)}/>
-          {selectedFilms.length > stepFilms && <ButtonShowMore />}
+          <FilmsList films={selectedFilms.slice(0, renderedFilms)}/>
+          {selectedFilms.length > renderedFilms && <ButtonShowMore />}
 
         </section>
 
