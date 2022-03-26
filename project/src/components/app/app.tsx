@@ -1,5 +1,5 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import {useAppSelector} from '../../hooks';
+import { Route, Routes } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
@@ -11,6 +11,8 @@ import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { isCheckedAuth } from '../../utils';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
   promoFilmName: string;
@@ -27,7 +29,7 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear}: AppProps): JSX.Elem
     );
   }
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -67,7 +69,7 @@ function App({promoFilmName, promoFilmGenre, promoFilmYear}: AppProps): JSX.Elem
           element={<NotFound />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
