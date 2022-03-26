@@ -1,16 +1,13 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/';
 import { AppRoute } from '../../const';
-import { Movies } from '../../types/movie';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';
 
-type MovieProps = {
-  films: Movies;
-}
-
-function Movie({films}: MovieProps): JSX.Element {
+function Movie(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   const { id } = useParams();
   const movie = films.find((film) => film.id === Number(id));
 

@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { logoutAction } from '../../store/api-actions';
+import { useAppDispatch} from '../../hooks';
+
 
 function UserNav(): JSX.Element {
+  const dispatch = useAppDispatch();
   return (
     <ul className="user-block">
       <li className="user-block__item">
@@ -12,7 +16,16 @@ function UserNav(): JSX.Element {
         </div>
       </li>
       <li className="user-block__item">
-        <a className="user-block__link" href="/">Sign out</a>
+        <Link
+          className="user-block__link"
+          onClick={(evt) => {
+            evt.preventDefault();
+            dispatch(logoutAction());
+          }}
+          to="/"
+        >
+          Sign out
+        </Link>
       </li>
     </ul>
   );

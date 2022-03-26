@@ -1,10 +1,15 @@
+import { AuthorizationStatus } from '../const.js';
 import { store } from '../store/index.js';
-import { Movies } from './movie.js';
+import { Movie, Movies } from './movie.js';
 
 export type State = {
   genre: string;
-  allFilms: Movies;
-  stepFilms: number;
+  films: Movies;
+  promoFilm:  Movie | null;
+  renderedFilms: number;
+  authorizationStatus: AuthorizationStatus;
+  error: string;
+  isDataLoaded: boolean;
 };
 
 export type AppDispatch = typeof store.dispatch;
