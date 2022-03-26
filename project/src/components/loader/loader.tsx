@@ -1,7 +1,7 @@
-import styles from './loading-screen.module.css';
+import styles from './loader.module.css';
 
 
-function LoadingScreen(): JSX.Element {
+function Loader(): JSX.Element {
   return (
     <div className={styles.container}>
       <p>Loading ...</p>
@@ -10,4 +10,4 @@ function LoadingScreen(): JSX.Element {
   );
 }
 
-export default LoadingScreen;
+export default Loader;

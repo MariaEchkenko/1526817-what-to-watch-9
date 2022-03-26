@@ -1,8 +1,6 @@
 export const ALL_GENRES = 'All genres';
 export const FILMS_STEP = 8;
 
-export const TIMEOUT_SHOW_ERROR = 2000;
-
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -27,7 +25,7 @@ export enum APIRoute {
 }
 
 export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
