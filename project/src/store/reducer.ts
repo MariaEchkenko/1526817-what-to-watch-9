@@ -3,6 +3,7 @@ import {
   changeGenre,
   incrementFilmCount,
   loadMovies,
+  loadPromoFilm,
   requireAuthorization,
   resetFilmCount,
   setError } from './action';
@@ -12,6 +13,7 @@ import { State } from '../types/state';
 const initialState: State = {
   genre: ALL_GENRES,
   films: [],
+  promoFilm: null,
   renderedFilms: FILMS_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
   error: '',
@@ -32,6 +34,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadMovies, (state, action) => {
       state.films = action.payload;
       state.isDataLoaded = true;
+    })
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

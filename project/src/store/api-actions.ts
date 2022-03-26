@@ -1,8 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
-import { Movies } from '../types/movie';
-import { loadMovies, requireAuthorization, setError, redirectToRoute } from './action';
+import {  Movie, Movies } from '../types/movie';
+import {
+  loadMovies,
+  loadPromoFilm,
+  requireAuthorization,
+  setError,
+  redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus, AppRoute, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -25,6 +30,18 @@ export const fetchMovieAction = createAsyncThunk(
     try {
       const {data} = await api.get<Movies>(APIRoute.Films);
       store.dispatch(loadMovies(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchPromoFilmAction = createAsyncThunk(
+  'data/fetchPromoFilm',
+  async () => {
+    try {
+      const {data} = await api.get<Movie>(APIRoute.Promo);
+      store.dispatch(loadPromoFilm(data));
     } catch (error) {
       errorHandle(error);
     }
