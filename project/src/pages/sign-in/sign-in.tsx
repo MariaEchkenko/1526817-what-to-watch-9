@@ -35,8 +35,8 @@ function SignIn(): JSX.Element {
     password: {
       value: '',
       error: false,
-      errorText: 'Пароль должен содержать не менее 3х символов',
-      regex: /^[a-zA-Z0-9._-]{3,}$/,
+      errorText: 'Пароль должен содержать минимум одну букву и одну цифру',
+      regex: /[0-9]+[a-z]|[a-z]+[0-9]/,
     },
   });
 
