@@ -2,7 +2,6 @@ import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import { FormEvent, ChangeEvent, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
-import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import classNames from 'classnames';
 import styles from './sign-in.module.css';
@@ -25,6 +24,8 @@ type FormStateProps = {
 }
 
 function SignIn(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const [formState, setFormState] = useState<FormStateProps>({
     email: {
       value: '',
@@ -44,6 +45,7 @@ function SignIn(): JSX.Element {
     const { name, value } = target;
     const rule = formState[name].regex;
     const isValid = rule.test(value);
+
     setFormState({
       ...formState,
       [name]: {
@@ -54,22 +56,17 @@ function SignIn(): JSX.Element {
     });
   };
 
-  const dispatch = useAppDispatch();
-
-  const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-  };
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    onSubmit({
+    dispatch(loginAction({
       login: formState.email.value,
       password: formState.password.value,
-    });
+    }));
   };
 
-  const isDisabled = formState.email.error || formState.password.error || formState.email.value === '' || formState.password.value === '';
+  const isDisabled = Object.values(formState).some((key) => key.error) || Object.values(formState).some((key) => key.value === '');
+  const errorField = Object.values(formState).find((value) => (value.error));
 
   return (
     <div className="user-page">
@@ -85,8 +82,12 @@ function SignIn(): JSX.Element {
           className="sign-in__form"
           onSubmit={handleSubmit}
         >
+          {errorField &&
+            <div className="sign-in__message">
+              <p>{errorField.errorText}</p>
+            </div>}
           <div className="sign-in__fields">
-            {Object.entries(formFields).map(([name, lable]) => {
+            {Object.entries(formFields).map(([name, label]) => {
 
               const inputClasses = classNames('sign-in__input', {
                 [styles.error]: formState[name].error,
@@ -97,22 +98,27 @@ function SignIn(): JSX.Element {
                   <input
                     className={inputClasses}
                     type={name}
-                    placeholder={lable}
+                    placeholder={label}
                     name={name}
                     id={name}
                     value={formState[name].value}
                     onChange={handleChange}
                   />
-                  <label className="sign-in__label visually-hidden" htmlFor={name}>{lable}</label>
-                  {formState[name].error
-                    ? <p>{formState[name].errorText}</p>
-                    : ''}
+                  <label className="sign-in__label visually-hidden" htmlFor={name}>{label}</label>
                 </div>
               );
             })}
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit" disabled={isDisabled}>Sign in</button>
+            <button
+              className={classNames('sign-in__btn', {
+                [styles.disabled]: isDisabled,
+              })}
+              type="submit"
+              disabled={isDisabled}
+            >
+              Sign in
+            </button>
           </div>
         </form>
       </div>
