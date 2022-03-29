@@ -8,5 +8,4 @@ export const resetFilmCount = createAction('films/resetFilmCount');
 export const loadMovies = createAction<Movies>('data/loadMovies');
 export const loadPromoFilm = createAction<Movie>('data/loadPromoFilm');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-export const setError = createAction<string>('films/setError');
 export const redirectToRoute = createAction<AppRoute>('films/redirectToRoute');

@@ -9,7 +9,7 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import LoadingScreen from '../loading-screen/loading-screen';
+import Loader from '../loader/loader';
 import { isCheckedAuth } from '../../utils';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
@@ -19,7 +19,7 @@ function App(): JSX.Element {
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
-      <LoadingScreen />
+      <Loader />
     );
   }
   return (

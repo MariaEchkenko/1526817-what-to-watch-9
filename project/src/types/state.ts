@@ -8,7 +8,6 @@ export type State = {
   promoFilm:  Movie | null;
   renderedFilms: number;
   authorizationStatus: AuthorizationStatus;
-  error: string;
   isDataLoaded: boolean;
 };
 
