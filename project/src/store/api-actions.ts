@@ -2,13 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
 import {  Movie, Movies } from '../types/movie';
-import { Comments } from '../types/comment';
+import { Comments, userComment } from '../types/comment';
 import {
   loadMovies,
   loadMovie,
   loadPromoFilm,
   loadSimilarFilms,
   loadReviews,
+  sendUserReview,
   requireAuthorization,
   redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
@@ -77,6 +78,19 @@ export const fetchReviewsAction = createAsyncThunk(
   },
 );
 
+export const sendUserReviewAction = createAsyncThunk(
+  'data/sendUserReview',
+  async ({id, rating, comment}: userComment) => {
+    try {
+      const {data} = await api.post<userComment>(`${APIRoute.Comments}/${id}`, {rating, comment});
+      store.dispatch(sendUserReview(data));
+      store.dispatch(redirectToRoute(AppRoute.Main)); //не могу перенаправить на стр.фильма `${AppRoute.Film}/${id}` ругается TS
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
@@ -97,7 +111,7 @@ export const loginAction = createAsyncThunk(
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      store.dispatch(redirectToRoute(AppRoute.Film));
+      store.dispatch(redirectToRoute(AppRoute.Main));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));

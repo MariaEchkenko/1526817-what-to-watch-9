@@ -1,7 +1,7 @@
 import { AuthorizationStatus } from '../const.js';
 import { store } from '../store/index.js';
 import { Movie, Movies } from './movie.js';
-import { Comments } from './comment';
+import { userComment, Comments } from './comment';
 
 export type State = {
   genre: string;
@@ -10,6 +10,7 @@ export type State = {
   promoFilm:  Movie | null;
   similarFilms: Movies;
   reviews: Comments;
+  userReviews: userComment | null;
   renderedFilms: number;
   authorizationStatus: AuthorizationStatus;
   isDataMoviesLoaded: boolean;

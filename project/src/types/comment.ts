@@ -10,3 +10,9 @@ export type Comment = {
 };
 
 export type Comments = Comment[];
+
+export type userComment = {
+  id: number,
+  rating: number,
+  comment: string,
+}

@@ -7,6 +7,7 @@ import {
   loadPromoFilm,
   loadSimilarFilms,
   loadReviews,
+  sendUserReview,
   requireAuthorization,
   resetFilmCount } from './action';
 import { ALL_GENRES, FILMS_STEP, AuthorizationStatus } from '../const';
@@ -20,6 +21,7 @@ const initialState: State = {
   similarFilms: [],
   renderedFilms: FILMS_STEP,
   reviews: [],
+  userReviews: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataMoviesLoaded: false,
   isDataMovieLoaded: false,
@@ -56,6 +58,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
       state.isDataReviewsLoaded = true;
+    })
+    .addCase(sendUserReview, (state, action) => {
+      state.userReviews = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
