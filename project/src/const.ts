@@ -7,7 +7,8 @@ export enum AppRoute {
   SignIn = '/login',
   MyList = '/mylist',
   Film = '/films',
-  Player = '/player'
+  Player = '/player',
+  NotFound = '/404'
 }
 
 export enum AuthorizationStatus {
@@ -25,7 +26,7 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
-export enum HTTP_CODE {
+export enum HttpCode {
   BadRequest = 400,
   Unauthorized = 401,
   NotFound = 404,

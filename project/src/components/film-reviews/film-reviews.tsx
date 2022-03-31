@@ -1,21 +1,42 @@
-import { Comments } from '../../types/comment';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { Movie } from '../../types/movie';
 import Review from '../review/review';
+import Loader from '../../components/loader/loader';
 
 type FilmReviewsProps = {
-  reviews: Comments;
+  film: Movie;
 }
 
-function FilmReviews({reviews}: FilmReviewsProps): JSX.Element {
+function FilmReviews({film}: FilmReviewsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const id = Number(film.id);
+
+  useEffect(() => {
+    dispatch(fetchReviewsAction(id));
+  }, [id]);
+
+  const reviews = useAppSelector((state) => state.reviews);
+  const isDataReviewsLoaded = useAppSelector((state) => state.isDataReviewsLoaded);
+
   const halfIndex = Math.ceil(reviews.length / 2);
   const reviewsFirstCol = reviews.slice(0, halfIndex);
   const reviewsSecondCol = reviews.slice(halfIndex, reviews.length);
+
+  if (!isDataReviewsLoaded) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {reviewsFirstCol.map((review) => (
           <Review
-            key = {review.user.id}
+            key = {review.id}
             review = {review}
           />
         ))}
@@ -23,7 +44,7 @@ function FilmReviews({reviews}: FilmReviewsProps): JSX.Element {
       <div className="film-card__reviews-col">
         {reviewsSecondCol.map((review) => (
           <Review
-            key = {review.user.id}
+            key = {review.id}
             review = {review}
           />
         ))}

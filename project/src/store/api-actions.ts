@@ -2,11 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
 import {  Movie, Movies } from '../types/movie';
+import { Comments } from '../types/comment';
 import {
   loadMovies,
   loadMovie,
   loadPromoFilm,
   loadSimilarFilms,
+  loadReviews,
   requireAuthorization,
   redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
@@ -34,6 +36,7 @@ export const fetchMovieAction = createAsyncThunk(
       const {data} = await api.get<Movie>(`${APIRoute.Films}/${id}`);
       store.dispatch(loadMovie(data));
     } catch (error) {
+      store.dispatch(redirectToRoute(AppRoute.NotFound));
       errorHandle(error);
     }
   },
@@ -57,6 +60,18 @@ export const fetchPromoFilmAction = createAsyncThunk(
     try {
       const {data} = await api.get<Movie>(APIRoute.Promo);
       store.dispatch(loadPromoFilm(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk(
+  'data/fetchReviews',
+  async (id: number) => {
+    try {
+      const {data} = await api.get<Comments>(`${APIRoute.Comments}/${id}`);
+      store.dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
     }

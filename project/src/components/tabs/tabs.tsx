@@ -13,7 +13,7 @@ const getComponentByTab = (activeTab: string, film: Movie) => {
     case 'Details':
       return <FilmDetails film={film} />;
     case 'Reviews':
-      return <FilmReviews reviews={film.review} />;
+      return <FilmReviews film={film} />;
   }
 };
 
