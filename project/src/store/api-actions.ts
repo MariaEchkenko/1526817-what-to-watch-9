@@ -4,7 +4,9 @@ import { store } from '../store';
 import {  Movie, Movies } from '../types/movie';
 import {
   loadMovies,
+  loadMovie,
   loadPromoFilm,
+  loadSimilarFilms,
   requireAuthorization,
   redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
@@ -13,12 +15,36 @@ import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { errorHandle } from '../services/error-handle';
 
-export const fetchMovieAction = createAsyncThunk(
+export const fetchMoviesAction = createAsyncThunk(
   'data/fetchMovies',
   async () => {
     try {
       const {data} = await api.get<Movies>(APIRoute.Films);
       store.dispatch(loadMovies(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchMovieAction = createAsyncThunk(
+  'data/fetchMovie',
+  async (id: number) => {
+    try {
+      const {data} = await api.get<Movie>(`${APIRoute.Films}/${id}`);
+      store.dispatch(loadMovie(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchSimilarMoviesAction = createAsyncThunk(
+  'data/fetchSimilarMovies',
+  async (id: number) => {
+    try {
+      const {data} = await api.get<Movies>(`${APIRoute.Films}/${id}/similar`);
+      store.dispatch(loadSimilarFilms(data));
     } catch (error) {
       errorHandle(error);
     }
