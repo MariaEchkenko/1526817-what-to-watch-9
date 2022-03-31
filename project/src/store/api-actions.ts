@@ -36,7 +36,6 @@ export const fetchMovieAction = createAsyncThunk(
       const {data} = await api.get<Movie>(`${APIRoute.Films}/${id}`);
       store.dispatch(loadMovie(data));
     } catch (error) {
-      store.dispatch(redirectToRoute(AppRoute.NotFound));
       errorHandle(error);
     }
   },

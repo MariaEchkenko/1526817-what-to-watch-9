@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
 import { AppRoute } from '../../const';
 import { fetchMovieAction, fetchSimilarMoviesAction } from '../../store/api-actions';
@@ -8,6 +8,7 @@ import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';
 import Loader from '../../components/loader/loader';
+import Controls from '../../components/controls/controls';
 import { SIMILAR_FILMS_COUNT } from '../../const';
 
 function Movie(): JSX.Element {
@@ -54,21 +55,7 @@ function Movie(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <div className="film-card__buttons">
-                <Link to={`${AppRoute.Player}/${id}`} className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <Link to={`${AppRoute.Film}/${id}/review`} className="btn film-card__button">Add review</Link>
-              </div>
+              <Controls id={Number(id)} isMain={false} />
             </div>
           </div>
         </div>

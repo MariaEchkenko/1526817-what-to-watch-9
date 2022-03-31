@@ -44,7 +44,7 @@ function Main(): JSX.Element {
                 <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
-              <Controls />
+              <Controls id={Number(promoFilm?.id)} isMain/>
             </div>
           </div>
         </div>
