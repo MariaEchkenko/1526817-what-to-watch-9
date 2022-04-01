@@ -10,16 +10,16 @@ type FilmReviewsProps = {
 }
 
 function FilmReviews({film}: FilmReviewsProps): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
+  const isDataReviewsLoaded = useAppSelector((state) => state.isDataReviewsLoaded);
+
   const dispatch = useAppDispatch();
 
   const id = Number(film.id);
 
   useEffect(() => {
     dispatch(fetchReviewsAction(id));
-  }, [id]);
-
-  const reviews = useAppSelector((state) => state.reviews);
-  const isDataReviewsLoaded = useAppSelector((state) => state.isDataReviewsLoaded);
+  }, [dispatch, id]);
 
   const halfIndex = Math.ceil(reviews.length / 2);
   const reviewsFirstCol = reviews.slice(0, halfIndex);
@@ -36,16 +36,16 @@ function FilmReviews({film}: FilmReviewsProps): JSX.Element {
       <div className="film-card__reviews-col">
         {reviewsFirstCol.map((review) => (
           <Review
-            key = {review.id}
-            review = {review}
+            key={review.id}
+            review={review}
           />
         ))}
       </div>
       <div className="film-card__reviews-col">
         {reviewsSecondCol.map((review) => (
           <Review
-            key = {review.id}
-            review = {review}
+            key={review.id}
+            review={review}
           />
         ))}
       </div>

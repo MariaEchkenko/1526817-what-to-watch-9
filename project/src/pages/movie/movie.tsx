@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
-import { AppRoute } from '../../const';
 import { fetchMovieAction, fetchSimilarMoviesAction } from '../../store/api-actions';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
@@ -12,24 +11,21 @@ import Controls from '../../components/controls/controls';
 import { SIMILAR_FILMS_COUNT } from '../../const';
 
 function Movie(): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  const { id } = useParams();
-  useEffect(() => {
-    dispatch(fetchMovieAction(Number(id)));
-    dispatch(fetchSimilarMoviesAction(Number(id)));
-  }, [id]);
-
   const film = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const isDataMovieLoaded = useAppSelector((state) => state.isDataMovieLoaded);
   const isDataSimilarLoaded = useAppSelector((state) => state.isDataSimilarLoaded);
 
-  if (!film) {
-    return <Navigate to={AppRoute.Main} />;
-  }
+  const dispatch = useAppDispatch();
 
-  if (!isDataMovieLoaded || !isDataSimilarLoaded) {
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchMovieAction(Number(id)));
+    dispatch(fetchSimilarMoviesAction(Number(id)));
+  }, [dispatch, id]);
+
+  if (!film || !isDataMovieLoaded || !isDataSimilarLoaded) {
     return (
       <Loader />
     );
