@@ -17,7 +17,6 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
   useEffect(() => () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
-      //setIsActive(false);
     }
   }, []);
 
