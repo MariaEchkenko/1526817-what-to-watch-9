@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Movie } from '../../types/movie';
@@ -13,6 +13,12 @@ type FilmCardProps = {
 function FilmCard({film}: FilmCardProps): JSX.Element {
   const [isActive, setIsActive] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+  }, []);
 
   const handleFilmActive = () => {
     timerRef.current = setTimeout(() => {
