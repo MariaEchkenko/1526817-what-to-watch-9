@@ -7,7 +7,8 @@ export enum AppRoute {
   SignIn = '/login',
   MyList = '/mylist',
   Film = '/films',
-  Player = '/player'
+  Player = '/player',
+  NotFound = '/404',
 }
 
 export enum AuthorizationStatus {

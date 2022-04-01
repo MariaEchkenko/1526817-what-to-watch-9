@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Movie, Movies } from '../types/movie';
 import { userComment, Comments } from '../types/comment';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AuthorizationStatus } from '../const';
 
 export const changeGenre = createAction<string>('films/changeGenre');
 export const incrementFilmCount = createAction('films/incrementFilmCount');
@@ -13,4 +13,4 @@ export const loadSimilarFilms = createAction<Movies>('data/loadSimilarFilms');
 export const loadReviews = createAction<Comments>('data/loadReviews');
 export const sendUserReview = createAction<userComment>('data/sendUserReview');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-export const redirectToRoute = createAction<AppRoute>('films/redirectToRoute');
+export const redirectToRoute = createAction<string>('films/redirectToRoute');

@@ -37,6 +37,7 @@ export const fetchMovieAction = createAsyncThunk(
       const {data} = await api.get<Movie>(`${APIRoute.Films}/${id}`);
       store.dispatch(loadMovie(data));
     } catch (error) {
+      store.dispatch(redirectToRoute(AppRoute.NotFound));
       errorHandle(error);
     }
   },
@@ -84,7 +85,7 @@ export const sendUserReviewAction = createAsyncThunk(
     try {
       const {data} = await api.post<userComment>(`${APIRoute.Comments}/${id}`, {rating, comment});
       store.dispatch(sendUserReview(data));
-      store.dispatch(redirectToRoute(AppRoute.Main)); //не могу перенаправить на стр.фильма `${AppRoute.Film}/${id}` ругается TS
+      store.dispatch(redirectToRoute(`${AppRoute.Film}/${id}`));
     } catch (error) {
       errorHandle(error);
     }
