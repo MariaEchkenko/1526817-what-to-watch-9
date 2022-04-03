@@ -36,6 +36,7 @@ export const sendUserReviewAction = createAsyncThunk<userComment, userComment, {
       return data;
     } catch (error) {
       errorHandle(error);
+      throw error;
     }
   },
 );

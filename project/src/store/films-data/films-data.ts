@@ -36,6 +36,7 @@ export const fetchMovieAction = createAsyncThunk<Movie, number, {
     } catch (error) {
       dispatch(redirectToRoute(AppRoute.NotFound));
       errorHandle(error);
+      throw error;
     }
   },
 );
@@ -52,6 +53,7 @@ export const fetchPromoFilmAction = createAsyncThunk<Movie, undefined, {
       return data;
     } catch (error) {
       errorHandle(error);
+      throw error;
     }
   },
 );
@@ -68,6 +70,7 @@ export const fetchSimilarMoviesAction = createAsyncThunk<Movies, number, {
       return data;
     } catch (error) {
       errorHandle(error);
+      throw error;
     }
   },
 );
