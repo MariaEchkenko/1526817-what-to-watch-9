@@ -1,16 +1,14 @@
 import { useAppSelector } from '../../hooks/';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
 import UserNav from '../../components/user-nav/user-nav';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
-import { selectFilms } from '../../store/films-data/selectors';
+import { selectFilm } from '../../store/films-data/selectors';
 
 function AddReview(): JSX.Element {
-  const films = useAppSelector(selectFilms);
-  const { id } = useParams();
-  const movie = films.find((film) => film.id === Number(id));
-  if (!movie) {
+  const film = useAppSelector(selectFilm);
+  if (!film) {
     return <Navigate to={AppRoute.Main} />;
   }
 
@@ -18,7 +16,7 @@ function AddReview(): JSX.Element {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={movie.backgroundImage} alt={movie.name} />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -29,7 +27,7 @@ function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`${AppRoute.Film}/${movie.id}`} className="breadcrumbs__link">{movie.name}</Link>
+                <Link to={`${AppRoute.Film}/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link" href="/">Add review</a>
@@ -41,7 +39,7 @@ function AddReview(): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={movie.posterImage} alt={`${movie.name} poster`} width="218" height="327" />
+          <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
         </div>
       </div>
 

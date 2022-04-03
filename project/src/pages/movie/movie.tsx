@@ -11,12 +11,12 @@ import Controls from '../../components/controls/controls';
 import { LoadingStatus, SIMILAR_FILMS_COUNT } from '../../const';
 import { selectFilm,
   selectSimilarFilms,
-  selectIsMovieLoaded } from '../../store/films-data/selectors';
+  selectFilmStatus } from '../../store/films-data/selectors';
 
 function Movie(): JSX.Element {
   const film = useAppSelector(selectFilm);
   const similarFilms = useAppSelector(selectSimilarFilms);
-  const isMovieLoaded = useAppSelector(selectIsMovieLoaded);
+  const filmStatus = useAppSelector(selectFilmStatus);
 
   const dispatch = useAppDispatch();
 
@@ -28,7 +28,7 @@ function Movie(): JSX.Element {
     dispatch(fetchSimilarMoviesAction(selectedFilmId));
   }, [dispatch, selectedFilmId]);
 
-  if (!film || isMovieLoaded === LoadingStatus.LOADING) {
+  if (!film || filmStatus === LoadingStatus.LOADING) {
     return (
       <Loader />
     );

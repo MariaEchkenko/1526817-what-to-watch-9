@@ -5,7 +5,7 @@ import { Movie } from '../../types/movie';
 import Review from '../review/review';
 import Loader from '../../components/loader/loader';
 import { LoadingStatus } from '../../const';
-import { selectReviews, selectIsReviewsLoaded } from '../../store/review-data/selectors';
+import { selectReviews, selectReviewsStatus } from '../../store/review-data/selectors';
 
 type FilmReviewsProps = {
   film: Movie;
@@ -13,7 +13,7 @@ type FilmReviewsProps = {
 
 function FilmReviews({film}: FilmReviewsProps): JSX.Element {
   const reviews = useAppSelector(selectReviews);
-  const isReviewsLoaded = useAppSelector(selectIsReviewsLoaded);
+  const reviewsStatus = useAppSelector(selectReviewsStatus);
 
   const dispatch = useAppDispatch();
 
@@ -27,7 +27,7 @@ function FilmReviews({film}: FilmReviewsProps): JSX.Element {
   const reviewsFirstCol = reviews.slice(0, halfIndex);
   const reviewsSecondCol = reviews.slice(halfIndex, reviews.length);
 
-  if (isReviewsLoaded === LoadingStatus.LOADING) {
+  if (reviewsStatus === LoadingStatus.LOADING) {
     return (
       <Loader />
     );

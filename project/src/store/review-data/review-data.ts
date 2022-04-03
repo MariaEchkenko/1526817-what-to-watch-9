@@ -43,8 +43,8 @@ export const sendUserReviewAction = createAsyncThunk<userComment, userComment, {
 const initialState: ReviewsData = {
   reviews: [],
   userReview: null,
-  isReviewsLoaded: LoadingStatus.IDLE,
-  isReviewSended: LoadingStatus.IDLE,
+  reviewsStatus: LoadingStatus.IDLE,
+  reviewSendedStatus: LoadingStatus.IDLE,
 };
 
 export const reviewsData = createSlice({
@@ -54,24 +54,24 @@ export const reviewsData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchReviewsAction.pending, (state) => {
-        state.isReviewsLoaded = LoadingStatus.LOADING;
+        state.reviewsStatus = LoadingStatus.LOADING;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        state.isReviewsLoaded = LoadingStatus.SUCCEEDED;
+        state.reviewsStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(fetchReviewsAction.rejected, (state) => {
-        state.isReviewsLoaded = LoadingStatus.FAILED;
+        state.reviewsStatus = LoadingStatus.FAILED;
       })
       .addCase(sendUserReviewAction.pending, (state) => {
-        state.isReviewSended = LoadingStatus.LOADING;
+        state.reviewSendedStatus = LoadingStatus.LOADING;
       })
       .addCase(sendUserReviewAction.fulfilled, (state, action) => {
         state.userReview = action.payload;
-        state.isReviewSended = LoadingStatus.SUCCEEDED;
+        state.reviewSendedStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(sendUserReviewAction.rejected, (state) => {
-        state.isReviewSended = LoadingStatus.FAILED;
+        state.reviewSendedStatus = LoadingStatus.FAILED;
       });
   },
 });

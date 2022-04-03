@@ -14,22 +14,22 @@ export type FilmsData = {
   film: Movie | null;
   promoFilm:  Movie | null;
   similarFilms: Movies;
-  isMoviesLoaded: LoadingStatus;
-  isMovieLoaded: LoadingStatus;
-  isPromoLoaded: LoadingStatus;
-  isSimilarLoaded: LoadingStatus;
+  filmsStatus: LoadingStatus;
+  filmStatus: LoadingStatus;
+  promoStatus: LoadingStatus;
+  similarStatus: LoadingStatus;
 }
 
 export type ReviewsData = {
   reviews: Comments;
   userReview: userComment | null;
-  isReviewsLoaded: LoadingStatus;
-  isReviewSended: LoadingStatus;
+  reviewsStatus: LoadingStatus;
+  reviewSendedStatus: LoadingStatus;
 };
 
 export type FavoriteData = {
   favoriteFilms: Movies;
-  isFavoriteLoaded: LoadingStatus;
+  favoriteStatus: LoadingStatus;
 }
 
 export type State = ReturnType<typeof store.getState>;

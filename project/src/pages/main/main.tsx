@@ -5,24 +5,33 @@ import GenreList from '../../components/genre-list/genre-list';
 import FilmsList from '../../components/films-list/films-list';
 import ButtonShowMore from '../../components/button-show-more/button-show-more';
 import Footer from '../../components/footer/footer';
-import { ALL_GENRES } from '../../const';
+import Loader from '../../components/loader/loader';
+import { LoadingStatus, ALL_GENRES } from '../../const';
 import { createGenresList } from '../../utils';
 import { selectFilms,
   selectPromoFilm,
   selectActiveGenre,
-  selectRenderedFilms } from '../../store/films-data/selectors';
+  selectRenderedFilms,
+  selectFilmsStatus } from '../../store/films-data/selectors';
 
 function Main(): JSX.Element {
   const films = useAppSelector(selectFilms);
   const promoFilm = useAppSelector(selectPromoFilm);
   const activeGenre = useAppSelector(selectActiveGenre);
   const renderedFilms = useAppSelector(selectRenderedFilms);
+  const filmsStatus = useAppSelector(selectFilmsStatus);
 
   const uniqueGenres = createGenresList(films);
 
   const selectedFilms = activeGenre === ALL_GENRES
     ? films
     : films.filter((film) => film.genre === activeGenre);
+
+  if (filmsStatus === LoadingStatus.LOADING) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <>

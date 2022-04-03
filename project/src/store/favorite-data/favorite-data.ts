@@ -24,7 +24,7 @@ export const fetchFavoriteFilmsAction = createAsyncThunk<Movies, undefined, {
 
 const initialState: FavoriteData = {
   favoriteFilms: [],
-  isFavoriteLoaded: LoadingStatus.IDLE,
+  favoriteStatus: LoadingStatus.IDLE,
 };
 
 export const favoriteFilmsData = createSlice({
@@ -34,14 +34,14 @@ export const favoriteFilmsData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchFavoriteFilmsAction.pending, (state) => {
-        state.isFavoriteLoaded = LoadingStatus.LOADING;
+        state.favoriteStatus = LoadingStatus.LOADING;
       })
       .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
         state.favoriteFilms = action.payload;
-        state.isFavoriteLoaded = LoadingStatus.SUCCEEDED;
+        state.favoriteStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(fetchFavoriteFilmsAction.rejected, (state) => {
-        state.isFavoriteLoaded = LoadingStatus.FAILED;
+        state.favoriteStatus = LoadingStatus.FAILED;
       });
   },
 });

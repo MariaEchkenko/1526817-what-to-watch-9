@@ -6,21 +6,28 @@ import UserNav from '../../components/user-nav/user-nav';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import Loader from '../../components/loader/loader';
+import Error from '../../components/error/error';
 import { LoadingStatus } from '../../const';
 import { selectFavoriteFilms, selectIsFavoriteLoaded } from '../../store/favorite-data/selectors';
 
 function MyList(): JSX.Element {
   const favoriteFilms = useAppSelector(selectFavoriteFilms);
-  const isFavoriteLoaded = useAppSelector(selectIsFavoriteLoaded);
+  const favoriteStatus = useAppSelector(selectIsFavoriteLoaded);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchFavoriteFilmsAction());
   }, [dispatch]);
 
-  if (isFavoriteLoaded === LoadingStatus.LOADING) {
+  if (favoriteStatus === LoadingStatus.LOADING) {
     return (
       <Loader />
+    );
+  }
+
+  if (favoriteStatus === LoadingStatus.FAILED) {
+    return (
+      <Error />
     );
   }
 

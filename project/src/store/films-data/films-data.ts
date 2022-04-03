@@ -79,10 +79,10 @@ const initialState: FilmsData = {
   film: null,
   promoFilm: null,
   similarFilms: [],
-  isMoviesLoaded: LoadingStatus.IDLE,
-  isMovieLoaded: LoadingStatus.IDLE,
-  isPromoLoaded: LoadingStatus.IDLE,
-  isSimilarLoaded: LoadingStatus.IDLE,
+  filmsStatus: LoadingStatus.IDLE,
+  filmStatus: LoadingStatus.IDLE,
+  promoStatus: LoadingStatus.IDLE,
+  similarStatus: LoadingStatus.IDLE,
 };
 
 export const filmsData = createSlice({
@@ -102,44 +102,44 @@ export const filmsData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchMoviesAction.pending, (state) => {
-        state.isMoviesLoaded = LoadingStatus.LOADING;
+        state.filmsStatus = LoadingStatus.LOADING;
       })
       .addCase(fetchMoviesAction.fulfilled, (state, action) => {
         state.films = action.payload;
-        state.isMoviesLoaded = LoadingStatus.SUCCEEDED;
+        state.filmsStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(fetchMoviesAction.rejected, (state) => {
-        state.isMoviesLoaded = LoadingStatus.FAILED;
+        state.filmsStatus = LoadingStatus.FAILED;
       })
       .addCase(fetchMovieAction.pending, (state) => {
-        state.isMovieLoaded = LoadingStatus.LOADING;
+        state.filmStatus = LoadingStatus.LOADING;
       })
       .addCase(fetchMovieAction.fulfilled, (state, action) => {
         state.film = action.payload;
-        state.isMovieLoaded = LoadingStatus.SUCCEEDED;
+        state.filmStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(fetchMovieAction.rejected, (state) => {
-        state.isMovieLoaded = LoadingStatus.FAILED;
+        state.filmStatus = LoadingStatus.FAILED;
       })
       .addCase(fetchPromoFilmAction.pending, (state) => {
-        state.isPromoLoaded = LoadingStatus.LOADING;
+        state.promoStatus = LoadingStatus.LOADING;
       })
       .addCase(fetchPromoFilmAction.fulfilled, (state, action) => {
         state.promoFilm = action.payload;
-        state.isPromoLoaded = LoadingStatus.SUCCEEDED;
+        state.promoStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(fetchPromoFilmAction.rejected, (state) => {
-        state.isPromoLoaded = LoadingStatus.FAILED;
+        state.promoStatus = LoadingStatus.FAILED;
       })
       .addCase(fetchSimilarMoviesAction.pending, (state) => {
-        state.isSimilarLoaded = LoadingStatus.LOADING;
+        state.similarStatus = LoadingStatus.LOADING;
       })
       .addCase(fetchSimilarMoviesAction.fulfilled, (state, action) => {
         state.similarFilms = action.payload;
-        state.isSimilarLoaded = LoadingStatus.SUCCEEDED;
+        state.similarStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(fetchSimilarMoviesAction.rejected, (state) => {
-        state.isSimilarLoaded = LoadingStatus.FAILED;
+        state.similarStatus = LoadingStatus.FAILED;
       });
   },
 });
