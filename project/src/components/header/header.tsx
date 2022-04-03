@@ -5,7 +5,7 @@ import { AuthorizationStatus } from '../../const';
 import SignIn from '../sign-in/sign-in';
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
   return (
     <header className="page-header film-card__head">
       <Logo />

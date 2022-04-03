@@ -9,10 +9,10 @@ import { ALL_GENRES } from '../../const';
 import { createGenresList } from '../../utils';
 
 function Main(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
-  const activeGenre = useAppSelector((state) => state.genre);
-  const renderedFilms = useAppSelector((state) => state.renderedFilms);
+  const films = useAppSelector(({FILMS}) => FILMS.films);
+  const promoFilm = useAppSelector(({FILMS}) => FILMS.promoFilm);
+  const activeGenre = useAppSelector(({FILMS}) => FILMS.genre);
+  const renderedFilms = useAppSelector(({FILMS}) => FILMS.renderedFilms);
 
   const uniqueGenres = createGenresList(films);
 

@@ -1,7 +1,7 @@
 import {FormEvent, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { sendUserReviewAction } from '../../store/api-actions';
+import { sendUserReviewAction } from '../../store/review-data/review-data';
 import RatingItem from '../rating-item/rating-item';
 
 const MIN_REVIEW_LENGTH = 50;

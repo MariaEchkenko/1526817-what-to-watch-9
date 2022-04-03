@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
-import { fetchMovieAction, fetchSimilarMoviesAction } from '../../store/api-actions';
+import { fetchMovieAction, fetchSimilarMoviesAction } from '../../store/films-data/films-data';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';
 import Loader from '../../components/loader/loader';
 import Controls from '../../components/controls/controls';
-import { SIMILAR_FILMS_COUNT } from '../../const';
+import { LoadingStatus, SIMILAR_FILMS_COUNT } from '../../const';
 
 function Movie(): JSX.Element {
-  const film = useAppSelector((state) => state.film);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const isDataMovieLoaded = useAppSelector((state) => state.isDataMovieLoaded);
-  const isDataSimilarLoaded = useAppSelector((state) => state.isDataSimilarLoaded);
+  const film = useAppSelector(({FILMS}) => FILMS.film);
+  const similarFilms = useAppSelector(({FILMS}) => FILMS.similarFilms);
+  const isMovieLoaded = useAppSelector(({FILMS}) => FILMS.isMovieLoaded);
+  const isSimilarLoaded = useAppSelector(({FILMS}) => FILMS.isSimilarLoaded);
 
   const dispatch = useAppDispatch();
 
@@ -25,7 +25,7 @@ function Movie(): JSX.Element {
     dispatch(fetchSimilarMoviesAction(Number(id)));
   }, [dispatch, id]);
 
-  if (!film || !isDataMovieLoaded || !isDataSimilarLoaded) {
+  if (!film || isMovieLoaded === LoadingStatus.LOADING || isSimilarLoaded === LoadingStatus.LOADING) {
     return (
       <Loader />
     );

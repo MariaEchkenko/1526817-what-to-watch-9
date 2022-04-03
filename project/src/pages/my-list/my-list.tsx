@@ -5,7 +5,7 @@ import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 
 function MyList(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector(({FILMS}) =>FILMS.films);
   const favoriteFilms = films.filter((film) => film.isFavorite);
 
   return (

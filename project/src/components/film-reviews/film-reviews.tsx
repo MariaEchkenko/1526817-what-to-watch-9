@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
-import { fetchReviewsAction } from '../../store/api-actions';
+import { fetchReviewsAction } from '../../store/review-data/review-data';
 import { Movie } from '../../types/movie';
 import Review from '../review/review';
 import Loader from '../../components/loader/loader';
+import { LoadingStatus } from '../../const';
 
 type FilmReviewsProps = {
   film: Movie;
 }
 
 function FilmReviews({film}: FilmReviewsProps): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
-  const isDataReviewsLoaded = useAppSelector((state) => state.isDataReviewsLoaded);
+  const reviews = useAppSelector(({REVIEWS}) => REVIEWS.reviews);
+  const isReviewsLoaded = useAppSelector(({REVIEWS}) => REVIEWS.isReviewsLoaded);
 
   const dispatch = useAppDispatch();
 
@@ -25,7 +26,7 @@ function FilmReviews({film}: FilmReviewsProps): JSX.Element {
   const reviewsFirstCol = reviews.slice(0, halfIndex);
   const reviewsSecondCol = reviews.slice(halfIndex, reviews.length);
 
-  if (!isDataReviewsLoaded) {
+  if (isReviewsLoaded === LoadingStatus.LOADING) {
     return (
       <Loader />
     );

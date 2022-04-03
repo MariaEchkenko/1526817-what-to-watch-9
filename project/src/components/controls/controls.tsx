@@ -9,7 +9,7 @@ type ControlsProps = {
 }
 
 function Controls({id, isMain}: ControlsProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
 
   return (
     <div className="film-card__buttons">

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
-import { AppRoute } from '../../const';
+import { AppRoute, LoadingStatus } from '../../const';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
@@ -15,13 +15,15 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
-  const {authorizationStatus, isDataMoviesLoaded: isDataLoaded} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {isMoviesLoaded} = useAppSelector(({FILMS}) => FILMS);
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || isMoviesLoaded === LoadingStatus.LOADING) {
     return (
       <Loader />
     );
   }
+
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>

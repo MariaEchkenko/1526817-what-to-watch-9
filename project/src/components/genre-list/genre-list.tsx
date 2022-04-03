@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/';
-import { changeGenre, resetFilmCount } from '../../store/action';
+import { changeGenre, resetFilmCount } from '../../store/films-data/films-data';
 import classNames from 'classnames';
 
 

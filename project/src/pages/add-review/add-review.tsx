@@ -7,7 +7,7 @@ import AddReviewForm from '../../components/add-review-form/add-review-form';
 
 
 function AddReview(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector(({FILMS}) => FILMS.films);
   const { id } = useParams();
   const movie = films.find((film) => film.id === Number(id));
   if (!movie) {
