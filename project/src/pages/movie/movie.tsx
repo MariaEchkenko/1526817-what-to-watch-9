@@ -11,25 +11,24 @@ import Controls from '../../components/controls/controls';
 import { LoadingStatus, SIMILAR_FILMS_COUNT } from '../../const';
 import { selectFilm,
   selectSimilarFilms,
-  selectIsMovieLoaded,
-  selectIsSimilarLoaded } from '../../store/films-data/selectors';
+  selectIsMovieLoaded } from '../../store/films-data/selectors';
 
 function Movie(): JSX.Element {
   const film = useAppSelector(selectFilm);
   const similarFilms = useAppSelector(selectSimilarFilms);
   const isMovieLoaded = useAppSelector(selectIsMovieLoaded);
-  const isSimilarLoaded = useAppSelector(selectIsSimilarLoaded);
 
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
+  const selectedFilmId = Number(id);
 
   useEffect(() => {
-    dispatch(fetchMovieAction(Number(id)));
-    dispatch(fetchSimilarMoviesAction(Number(id)));
-  }, [dispatch, id]);
+    dispatch(fetchMovieAction(selectedFilmId));
+    dispatch(fetchSimilarMoviesAction(selectedFilmId));
+  }, [dispatch, selectedFilmId]);
 
-  if (!film || isMovieLoaded === LoadingStatus.LOADING || isSimilarLoaded === LoadingStatus.LOADING) {
+  if (!film || isMovieLoaded === LoadingStatus.LOADING) {
     return (
       <Loader />
     );
@@ -55,7 +54,7 @@ function Movie(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <Controls id={Number(id)} isMain={false} />
+              <Controls id={selectedFilmId} isMain={false} />
             </div>
           </div>
         </div>

@@ -1,14 +1,18 @@
+import { AxiosInstance } from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { api, store } from '../index';
-import { FilmsData } from '../../types/state';
+import { AppDispatch, State, FilmsData } from '../../types/state';
 import { Movie, Movies } from '../../types/movie';
 import { errorHandle } from '../../services/error-handle';
 import { redirectToRoute } from '../action';
 import { LoadingStatus, AppRoute, APIRoute, NameSpace, ALL_GENRES, FILMS_STEP } from '../../const';
 
-export const fetchMoviesAction = createAsyncThunk(
+export const fetchMoviesAction = createAsyncThunk<Movies, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
   'data/fetchMovies',
-  async () => {
+  async (_arg, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Movies>(APIRoute.Films);
       return data;
@@ -19,22 +23,30 @@ export const fetchMoviesAction = createAsyncThunk(
   },
 );
 
-export const fetchMovieAction = createAsyncThunk(
+export const fetchMovieAction = createAsyncThunk<Movie, number, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
   'data/fetchMovie',
-  async (id: number) => {
+  async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Movie>(`${APIRoute.Films}/${id}`);
       return data;
     } catch (error) {
-      store.dispatch(redirectToRoute(AppRoute.NotFound));
+      dispatch(redirectToRoute(AppRoute.NotFound));
       errorHandle(error);
     }
   },
 );
 
-export const fetchPromoFilmAction = createAsyncThunk(
+export const fetchPromoFilmAction = createAsyncThunk<Movie, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
   'data/fetchPromoFilm',
-  async () => {
+  async (_arg, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Movie>(APIRoute.Promo);
       return data;
@@ -44,9 +56,13 @@ export const fetchPromoFilmAction = createAsyncThunk(
   },
 );
 
-export const fetchSimilarMoviesAction = createAsyncThunk(
+export const fetchSimilarMoviesAction = createAsyncThunk<Movies, number, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
   'data/fetchSimilarMovies',
-  async (id: number) => {
+  async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Movies>(`${APIRoute.Films}/${id}/similar`);
       return data;

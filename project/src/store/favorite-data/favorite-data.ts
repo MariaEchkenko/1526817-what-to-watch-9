@@ -1,13 +1,17 @@
+import { AxiosInstance } from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { api } from '../index';
-import { FavoriteData } from '../../types/state';
+import { AppDispatch, State, FavoriteData } from '../../types/state';
 import { Movies } from '../../types/movie';
 import { errorHandle } from '../../services/error-handle';
 import { LoadingStatus, APIRoute, NameSpace } from '../../const';
 
-export const fetchFavoriteFilmsAction = createAsyncThunk(
+export const fetchFavoriteFilmsAction = createAsyncThunk<Movies, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
   'data/fetchFavoriteFilms',
-  async () => {
+  async (_arg, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Movies>(APIRoute.Favorite);
       return data;

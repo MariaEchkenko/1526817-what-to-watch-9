@@ -1,4 +1,6 @@
-import { useAppSelector } from '../../hooks/';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/';
+import { fetchFavoriteFilmsAction } from '../../store/favorite-data/favorite-data';
 import Logo from '../../components/logo/logo';
 import UserNav from '../../components/user-nav/user-nav';
 import Footer from '../../components/footer/footer';
@@ -10,6 +12,11 @@ import { selectFavoriteFilms, selectIsFavoriteLoaded } from '../../store/favorit
 function MyList(): JSX.Element {
   const favoriteFilms = useAppSelector(selectFavoriteFilms);
   const isFavoriteLoaded = useAppSelector(selectIsFavoriteLoaded);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+  }, [dispatch]);
 
   if (isFavoriteLoaded === LoadingStatus.LOADING) {
     return (
