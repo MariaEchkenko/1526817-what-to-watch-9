@@ -13,10 +13,12 @@ import Loader from '../loader/loader';
 import { isCheckedAuth } from '../../utils';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
+import { selectIsMoviesLoaded } from '../../store/films-data/selectors';
 
 function App(): JSX.Element {
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const {isMoviesLoaded} = useAppSelector(({FILMS}) => FILMS);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const isMoviesLoaded = useAppSelector(selectIsMoviesLoaded);
 
   if (isCheckedAuth(authorizationStatus) || isMoviesLoaded === LoadingStatus.LOADING) {
     return (

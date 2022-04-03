@@ -9,12 +9,16 @@ import Tabs from '../../components/tabs/tabs';
 import Loader from '../../components/loader/loader';
 import Controls from '../../components/controls/controls';
 import { LoadingStatus, SIMILAR_FILMS_COUNT } from '../../const';
+import { selectFilm,
+  selectSimilarFilms,
+  selectIsMovieLoaded,
+  selectIsSimilarLoaded } from '../../store/films-data/selectors';
 
 function Movie(): JSX.Element {
-  const film = useAppSelector(({FILMS}) => FILMS.film);
-  const similarFilms = useAppSelector(({FILMS}) => FILMS.similarFilms);
-  const isMovieLoaded = useAppSelector(({FILMS}) => FILMS.isMovieLoaded);
-  const isSimilarLoaded = useAppSelector(({FILMS}) => FILMS.isSimilarLoaded);
+  const film = useAppSelector(selectFilm);
+  const similarFilms = useAppSelector(selectSimilarFilms);
+  const isMovieLoaded = useAppSelector(selectIsMovieLoaded);
+  const isSimilarLoaded = useAppSelector(selectIsSimilarLoaded);
 
   const dispatch = useAppDispatch();
 

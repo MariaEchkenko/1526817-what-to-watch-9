@@ -7,12 +7,16 @@ import ButtonShowMore from '../../components/button-show-more/button-show-more';
 import Footer from '../../components/footer/footer';
 import { ALL_GENRES } from '../../const';
 import { createGenresList } from '../../utils';
+import { selectFilms,
+  selectPromoFilm,
+  selectActiveGenre,
+  selectRenderedFilms } from '../../store/films-data/selectors';
 
 function Main(): JSX.Element {
-  const films = useAppSelector(({FILMS}) => FILMS.films);
-  const promoFilm = useAppSelector(({FILMS}) => FILMS.promoFilm);
-  const activeGenre = useAppSelector(({FILMS}) => FILMS.genre);
-  const renderedFilms = useAppSelector(({FILMS}) => FILMS.renderedFilms);
+  const films = useAppSelector(selectFilms);
+  const promoFilm = useAppSelector(selectPromoFilm);
+  const activeGenre = useAppSelector(selectActiveGenre);
+  const renderedFilms = useAppSelector(selectRenderedFilms);
 
   const uniqueGenres = createGenresList(films);
 

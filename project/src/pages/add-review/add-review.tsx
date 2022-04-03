@@ -4,10 +4,10 @@ import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
 import UserNav from '../../components/user-nav/user-nav';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
-
+import { selectFilms } from '../../store/films-data/selectors';
 
 function AddReview(): JSX.Element {
-  const films = useAppSelector(({FILMS}) => FILMS.films);
+  const films = useAppSelector(selectFilms);
   const { id } = useParams();
   const movie = films.find((film) => film.id === Number(id));
   if (!movie) {

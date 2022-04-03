@@ -3,10 +3,19 @@ import Logo from '../../components/logo/logo';
 import UserNav from '../../components/user-nav/user-nav';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
+import Loader from '../../components/loader/loader';
+import { LoadingStatus } from '../../const';
+import { selectFavoriteFilms, selectIsFavoriteLoaded } from '../../store/favorite-data/selectors';
 
 function MyList(): JSX.Element {
-  const films = useAppSelector(({FILMS}) =>FILMS.films);
-  const favoriteFilms = films.filter((film) => film.isFavorite);
+  const favoriteFilms = useAppSelector(selectFavoriteFilms);
+  const isFavoriteLoaded = useAppSelector(selectIsFavoriteLoaded);
+
+  if (isFavoriteLoaded === LoadingStatus.LOADING) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className="user-page">

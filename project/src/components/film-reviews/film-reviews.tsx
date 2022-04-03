@@ -5,14 +5,15 @@ import { Movie } from '../../types/movie';
 import Review from '../review/review';
 import Loader from '../../components/loader/loader';
 import { LoadingStatus } from '../../const';
+import { selectReviews, selectIsReviewsLoaded } from '../../store/review-data/selectors';
 
 type FilmReviewsProps = {
   film: Movie;
 }
 
 function FilmReviews({film}: FilmReviewsProps): JSX.Element {
-  const reviews = useAppSelector(({REVIEWS}) => REVIEWS.reviews);
-  const isReviewsLoaded = useAppSelector(({REVIEWS}) => REVIEWS.isReviewsLoaded);
+  const reviews = useAppSelector(selectReviews);
+  const isReviewsLoaded = useAppSelector(selectIsReviewsLoaded);
 
   const dispatch = useAppDispatch();
 

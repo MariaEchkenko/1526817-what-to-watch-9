@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/';
 import { AppRoute, AuthorizationStatus } from '../../const';
-
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
 type ControlsProps = {
   id: number;
@@ -9,7 +9,7 @@ type ControlsProps = {
 }
 
 function Controls({id, isMain}: ControlsProps): JSX.Element {
-  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   return (
     <div className="film-card__buttons">
