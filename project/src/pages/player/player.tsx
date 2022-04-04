@@ -1,5 +1,6 @@
+import { useEffect, useState, useRef } from 'react';
 import { useAppSelector } from '../../hooks/';
-import { useParams, Navigate } from 'react-router-dom';
+import {  useParams, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { selectFilms } from '../../store/films-data/selectors';
 
@@ -7,14 +8,40 @@ import { selectFilms } from '../../store/films-data/selectors';
 function Player(): JSX.Element {
   const films = useAppSelector(selectFilms);
   const { id } = useParams();
-  const movie = films.find((film) => film.id === Number(id));
-  if (!movie) {
+  const film = films.find((movie) => movie.id === Number(id));
+
+  const [isActive, setIsActive] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (videoRef.current === null) {
+      return;
+    }
+
+    if (isActive) {
+      videoRef.current.play();
+      return;
+    }
+
+    videoRef.current.pause();
+  }, [isActive]);
+
+  const handleFilmActive = () => {
+    setIsActive(!isActive);
+  };
+
+  if (!film) {
     return <Navigate to={AppRoute.Main} />;
   }
 
   return (
     <div className="player">
-      <video src={movie.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
+      <video
+        src={film.videoLink}
+        className="player__video"
+        poster={film.posterImage}
+      >
+      </video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -28,11 +55,15 @@ function Player(): JSX.Element {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
+          <button
+            type="button"
+            className="player__play"
+            onClick={handleFilmActive}
+          >
             <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
+              {isActive ? <use xlinkHref="#pause"></use> : <use xlinkHref="#play-s"></use>}
             </svg>
-            <span>Play</span>
+            <span>{isActive ? 'Pause' : 'Play'}</span>
           </button>
           <div className="player__name">Transpotting</div>
 

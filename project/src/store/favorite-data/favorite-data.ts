@@ -43,6 +43,7 @@ export const sendFavoriteFilmAction = createAsyncThunk<FilmStatus, FilmStatus, {
 const initialState: FavoriteData = {
   favoriteFilms: [],
   favoriteStatus: LoadingStatus.IDLE,
+  changeFavoriteStatus: LoadingStatus.IDLE,
 };
 
 export const favoriteFilmsData = createSlice({
@@ -62,13 +63,13 @@ export const favoriteFilmsData = createSlice({
         state.favoriteStatus = LoadingStatus.FAILED;
       })
       .addCase(sendFavoriteFilmAction.pending, (state) => {
-        state.favoriteStatus = LoadingStatus.LOADING;
+        state.changeFavoriteStatus = LoadingStatus.LOADING;
       })
       .addCase(sendFavoriteFilmAction.fulfilled, (state) => {
-        state.favoriteStatus = LoadingStatus.SUCCEEDED;
+        state.changeFavoriteStatus = LoadingStatus.SUCCEEDED;
       })
       .addCase(sendFavoriteFilmAction.rejected, (state) => {
-        state.favoriteStatus = LoadingStatus.FAILED;
+        state.changeFavoriteStatus = LoadingStatus.FAILED;
       });
   },
 });

@@ -30,6 +30,7 @@ export type ReviewsData = {
 export type FavoriteData = {
   favoriteFilms: Movies;
   favoriteStatus: LoadingStatus;
+  changeFavoriteStatus: LoadingStatus;
 }
 
 export type State = ReturnType<typeof store.getState>;
