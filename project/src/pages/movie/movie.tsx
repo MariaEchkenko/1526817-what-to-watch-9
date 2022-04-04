@@ -54,7 +54,7 @@ function Movie(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <Controls id={selectedFilmId} isMain={false} />
+              <Controls id={selectedFilmId} isFavorite={film.isFavorite} isMain={false} />
             </div>
           </div>
         </div>

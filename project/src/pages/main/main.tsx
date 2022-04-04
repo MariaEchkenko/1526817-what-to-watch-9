@@ -27,7 +27,8 @@ function Main(): JSX.Element {
     ? films
     : films.filter((film) => film.genre === activeGenre);
 
-  if (filmsStatus === LoadingStatus.LOADING) {
+
+  if (!promoFilm || filmsStatus === LoadingStatus.LOADING) {
     return (
       <Loader />
     );
@@ -57,7 +58,7 @@ function Main(): JSX.Element {
                 <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
-              <Controls id={Number(promoFilm?.id)} isMain/>
+              <Controls id={Number(promoFilm?.id)} isFavorite={promoFilm.isFavorite} isMain/>
             </div>
           </div>
         </div>
