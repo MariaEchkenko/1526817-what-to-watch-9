@@ -6,13 +6,15 @@ import FilmsList from '../../components/films-list/films-list';
 import ButtonShowMore from '../../components/button-show-more/button-show-more';
 import Footer from '../../components/footer/footer';
 import Loader from '../../components/loader/loader';
+import Error from '../../components/error/error';
 import { LoadingStatus, ALL_GENRES } from '../../const';
 import { createGenresList } from '../../utils';
 import { selectFilms,
   selectPromoFilm,
   selectActiveGenre,
   selectRenderedFilms,
-  selectFilmsStatus } from '../../store/films-data/selectors';
+  selectFilmsStatus,
+  selectPromoStatus } from '../../store/films-data/selectors';
 
 function Main(): JSX.Element {
   const films = useAppSelector(selectFilms);
@@ -20,6 +22,7 @@ function Main(): JSX.Element {
   const activeGenre = useAppSelector(selectActiveGenre);
   const renderedFilms = useAppSelector(selectRenderedFilms);
   const filmsStatus = useAppSelector(selectFilmsStatus);
+  const promoFilmStatus = useAppSelector(selectPromoStatus);
 
   const uniqueGenres = createGenresList(films);
 
@@ -31,6 +34,12 @@ function Main(): JSX.Element {
   if (!promoFilm || filmsStatus === LoadingStatus.LOADING) {
     return (
       <Loader />
+    );
+  }
+
+  if (filmsStatus === LoadingStatus.FAILED || promoFilmStatus === LoadingStatus.FAILED) {
+    return (
+      <Error />
     );
   }
 

@@ -2,7 +2,7 @@ import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import { FormEvent, ChangeEvent, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
-import { loginAction } from '../../store/api-actions';
+import { loginAction } from '../../store/user-process/user-process';
 import classNames from 'classnames';
 import styles from './sign-in.module.css';
 

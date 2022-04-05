@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { logoutAction } from '../../store/api-actions';
+import { logoutAction } from '../../store/user-process/user-process';
 import { useAppDispatch} from '../../hooks';
 
 

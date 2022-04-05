@@ -7,6 +7,7 @@ import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';
 import Loader from '../../components/loader/loader';
+import Error from '../../components/error/error';
 import Controls from '../../components/controls/controls';
 import { LoadingStatus, SIMILAR_FILMS_COUNT } from '../../const';
 import { selectFilm,
@@ -31,6 +32,12 @@ function Movie(): JSX.Element {
   if (!film || filmStatus === LoadingStatus.LOADING) {
     return (
       <Loader />
+    );
+  }
+
+  if (filmStatus === LoadingStatus.FAILED) {
+    return (
+      <Error />
     );
   }
 
