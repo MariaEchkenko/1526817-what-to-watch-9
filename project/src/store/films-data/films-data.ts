@@ -5,6 +5,7 @@ import { Movie, Movies } from '../../types/movie';
 import { errorHandle } from '../../services/error-handle';
 import { redirectToRoute } from '../action';
 import { LoadingStatus, AppRoute, APIRoute, NameSpace, ALL_GENRES, FILMS_STEP } from '../../const';
+import { sendFavoriteFilmAction } from '../favorite-data/favorite-data';
 
 export const fetchMoviesAction = createAsyncThunk<Movies, undefined, {
   dispatch: AppDispatch,
@@ -86,6 +87,7 @@ const initialState: FilmsData = {
   filmStatus: LoadingStatus.IDLE,
   promoStatus: LoadingStatus.IDLE,
   similarStatus: LoadingStatus.IDLE,
+  changeFavoriteStatus: LoadingStatus.IDLE,
 };
 
 export const filmsData = createSlice({
@@ -143,6 +145,18 @@ export const filmsData = createSlice({
       })
       .addCase(fetchSimilarMoviesAction.rejected, (state) => {
         state.similarStatus = LoadingStatus.FAILED;
+      })
+      .addCase(sendFavoriteFilmAction.fulfilled, (state, {payload}) => {
+        const index = state.films.findIndex(({id}) => id === payload.id);
+        if (index !== -1) {
+          state.films[index] = payload;
+        }
+        if (payload.id === state.film?.id) {
+          state.film = payload;
+        }
+        if (payload.id === state.promoFilm?.id) {
+          state.promoFilm = payload;
+        }
       });
   },
 });

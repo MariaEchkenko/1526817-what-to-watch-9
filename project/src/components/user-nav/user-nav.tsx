@@ -6,6 +6,7 @@ import { useAppDispatch} from '../../hooks';
 
 function UserNav(): JSX.Element {
   const dispatch = useAppDispatch();
+
   return (
     <ul className="user-block">
       <li className="user-block__item">

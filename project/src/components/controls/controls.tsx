@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
@@ -13,13 +12,17 @@ type ControlsProps = {
 
 function Controls({id, isFavorite, isMain}: ControlsProps): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const [status, setStatus] = useState(isFavorite);
-
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const handleFilmStatus =() => {
-    setStatus(!status);
-    dispatch(sendFavoriteFilmAction({id, status: Number(!status)}));
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+
+  const handleFilmStatus = () => {
+    if (isAuth) {
+      dispatch(sendFavoriteFilmAction({id, status: Number(!isFavorite)}));
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -33,14 +36,14 @@ function Controls({id, isFavorite, isMain}: ControlsProps): JSX.Element {
       <button
         className="btn btn--list film-card__button"
         type="button"
-        onClick = {handleFilmStatus}
+        onClick={handleFilmStatus}
       >
         <svg viewBox="0 0 19 20" width="19" height="20">
-          {status ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
+          {isFavorite ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
         </svg>
         <span>My list</span>
       </button>
-      {!isMain && authorizationStatus === AuthorizationStatus.Auth &&
+      {!isMain && isAuth &&
         <Link to={`${AppRoute.Film}/${id}/review`} className="btn film-card__button">Add review</Link>}
     </div>
   );

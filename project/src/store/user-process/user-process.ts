@@ -17,8 +17,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     try {
       await api.get(APIRoute.Login);
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       errorHandle(error);
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
 );
@@ -33,9 +35,11 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     try {
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(redirectToRoute(AppRoute.Main));
     } catch (error) {
       errorHandle(error);
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
 );
@@ -50,6 +54,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     try {
       await api.delete(APIRoute.Logout);
       dropToken();
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     } catch (error) {
       errorHandle(error);
     }
@@ -67,24 +72,6 @@ export const userProcess = createSlice({
     requireAuthorization: (state, action) => {
       state.authorizationStatus = action.payload;
     },
-  },
-  extraReducers(builder) {
-    builder
-      .addCase(loginAction.fulfilled, (state) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
-      })
-      .addCase(loginAction.rejected, (state) => {
-        state.authorizationStatus = AuthorizationStatus.NoAuth;
-      })
-      .addCase(logoutAction.fulfilled, (state) => {
-        state.authorizationStatus = AuthorizationStatus.NoAuth;
-      })
-      .addCase(checkAuthAction.fulfilled, (state) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
-      })
-      .addCase(checkAuthAction.rejected, (state) => {
-        state.authorizationStatus = AuthorizationStatus.NoAuth;
-      });
   },
 });
 

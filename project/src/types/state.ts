@@ -18,6 +18,7 @@ export type FilmsData = {
   filmStatus: LoadingStatus;
   promoStatus: LoadingStatus;
   similarStatus: LoadingStatus;
+  changeFavoriteStatus: LoadingStatus;
 }
 
 export type ReviewsData = {
