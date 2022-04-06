@@ -13,15 +13,17 @@ import Loader from '../loader/loader';
 import { isCheckedAuth } from '../../utils';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
 function App(): JSX.Element {
-  const {authorizationStatus, isDataMoviesLoaded: isDataLoaded} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus)) {
     return (
       <Loader />
     );
   }
+
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>

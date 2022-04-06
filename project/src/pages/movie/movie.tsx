@@ -1,33 +1,43 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/';
-import { fetchMovieAction, fetchSimilarMoviesAction } from '../../store/api-actions';
+import { fetchMovieAction, fetchSimilarMoviesAction } from '../../store/films-data/films-data';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import Tabs from '../../components/tabs/tabs';
 import Loader from '../../components/loader/loader';
+import Error from '../../components/error/error';
 import Controls from '../../components/controls/controls';
-import { SIMILAR_FILMS_COUNT } from '../../const';
+import { LoadingStatus, SIMILAR_FILMS_COUNT } from '../../const';
+import { selectFilm,
+  selectSimilarFilms,
+  selectFilmStatus } from '../../store/films-data/selectors';
 
 function Movie(): JSX.Element {
-  const film = useAppSelector((state) => state.film);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const isDataMovieLoaded = useAppSelector((state) => state.isDataMovieLoaded);
-  const isDataSimilarLoaded = useAppSelector((state) => state.isDataSimilarLoaded);
+  const film = useAppSelector(selectFilm);
+  const similarFilms = useAppSelector(selectSimilarFilms);
+  const filmStatus = useAppSelector(selectFilmStatus);
 
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
+  const selectedFilmId = Number(id);
 
   useEffect(() => {
-    dispatch(fetchMovieAction(Number(id)));
-    dispatch(fetchSimilarMoviesAction(Number(id)));
-  }, [dispatch, id]);
+    dispatch(fetchMovieAction(selectedFilmId));
+    dispatch(fetchSimilarMoviesAction(selectedFilmId));
+  }, [dispatch, selectedFilmId]);
 
-  if (!film || !isDataMovieLoaded || !isDataSimilarLoaded) {
+  if (!film || filmStatus === LoadingStatus.LOADING) {
     return (
       <Loader />
+    );
+  }
+
+  if (filmStatus === LoadingStatus.FAILED) {
+    return (
+      <Error />
     );
   }
 
@@ -51,7 +61,7 @@ function Movie(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <Controls id={Number(id)} isMain={false} />
+              <Controls id={selectedFilmId} isFavorite={film.isFavorite} isMain={false} />
             </div>
           </div>
         </div>

@@ -5,20 +5,43 @@ import GenreList from '../../components/genre-list/genre-list';
 import FilmsList from '../../components/films-list/films-list';
 import ButtonShowMore from '../../components/button-show-more/button-show-more';
 import Footer from '../../components/footer/footer';
-import { ALL_GENRES } from '../../const';
+import Loader from '../../components/loader/loader';
+import Error from '../../components/error/error';
+import { LoadingStatus, ALL_GENRES } from '../../const';
 import { createGenresList } from '../../utils';
+import { selectFilms,
+  selectPromoFilm,
+  selectActiveGenre,
+  selectRenderedFilms,
+  selectFilmsStatus,
+  selectPromoStatus } from '../../store/films-data/selectors';
 
 function Main(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
-  const activeGenre = useAppSelector((state) => state.genre);
-  const renderedFilms = useAppSelector((state) => state.renderedFilms);
+  const films = useAppSelector(selectFilms);
+  const promoFilm = useAppSelector(selectPromoFilm);
+  const activeGenre = useAppSelector(selectActiveGenre);
+  const renderedFilms = useAppSelector(selectRenderedFilms);
+  const filmsStatus = useAppSelector(selectFilmsStatus);
+  const promoFilmStatus = useAppSelector(selectPromoStatus);
 
   const uniqueGenres = createGenresList(films);
 
   const selectedFilms = activeGenre === ALL_GENRES
     ? films
     : films.filter((film) => film.genre === activeGenre);
+
+
+  if (!promoFilm || filmsStatus === LoadingStatus.LOADING) {
+    return (
+      <Loader />
+    );
+  }
+
+  if (filmsStatus === LoadingStatus.FAILED || promoFilmStatus === LoadingStatus.FAILED) {
+    return (
+      <Error />
+    );
+  }
 
   return (
     <>
@@ -44,7 +67,7 @@ function Main(): JSX.Element {
                 <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
-              <Controls id={Number(promoFilm?.id)} isMain/>
+              <Controls id={Number(promoFilm?.id)} isFavorite={promoFilm.isFavorite} isMain/>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks/';
-import { incrementFilmCount } from '../../store/action';
+import { incrementFilmCount } from '../../store/films-data/films-data';
 
 function ButtonShowMore(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -16,7 +16,7 @@ export const errorHandle = (error: ErrorType): void => {
         toast.info(response.data.error);
         break;
       case HttpCode.Unauthorized:
-        toast.info(response.data.error);
+        toast.info('You are not logged in. Application features are limited');
         break;
       case HttpCode.NotFound:
         toast.info(response.data.error);

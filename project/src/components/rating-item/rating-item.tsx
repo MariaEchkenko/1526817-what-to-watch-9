@@ -1,9 +1,10 @@
 type RatingItemProps = {
   item: number;
   onRatingChange: (item: number) => void;
+  isFormDisabled: boolean;
 }
 
-function RatingItem({item, onRatingChange}: RatingItemProps): JSX.Element {
+function RatingItem({item, onRatingChange, isFormDisabled}: RatingItemProps): JSX.Element {
   return (
     <>
       <input
@@ -13,6 +14,7 @@ function RatingItem({item, onRatingChange}: RatingItemProps): JSX.Element {
         name="rating"
         value={item}
         onChange={() => onRatingChange(item)}
+        disabled={isFormDisabled}
       />
       <label className="rating__label" htmlFor={`star-${item}`}>
         {`Rating ${item}`}
