@@ -19,13 +19,13 @@ function MyList(): JSX.Element {
     dispatch(fetchFavoriteFilmsAction());
   }, [dispatch]);
 
-  if (favoriteStatus === LoadingStatus.LOADING) {
+  if (favoriteStatus === LoadingStatus.Loading) {
     return (
       <Loader />
     );
   }
 
-  if (favoriteStatus === LoadingStatus.FAILED) {
+  if (favoriteStatus === LoadingStatus.Failed) {
     return (
       <Error />
     );

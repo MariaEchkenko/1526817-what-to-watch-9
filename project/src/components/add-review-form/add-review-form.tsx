@@ -1,5 +1,4 @@
 import {FormEvent, useState} from 'react';
-import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { sendUserReviewAction } from '../../store/review-data/review-data';
@@ -22,7 +21,7 @@ function AddReviewForm(): JSX.Element {
   const handleInputChange = (item: number) => setRating(item);
 
   const isDisabled = (review.length < MIN_REVIEW_LENGTH || review.length > MAX_REVIEW_LENGTH) || rating === 0;
-  const isFormDisabled = reviewSendedStatus === LoadingStatus.LOADING;
+  const isFormDisabled = reviewSendedStatus === LoadingStatus.Loading;
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -33,10 +32,6 @@ function AddReviewForm(): JSX.Element {
       comment: review,
     }));
   };
-
-  if (reviewSendedStatus === LoadingStatus.FAILED) {
-    toast.info('Something went wrong. Try again!');
-  }
 
   return (
     <form action="#" className="add-review__form" onSubmit={handleSubmit}>

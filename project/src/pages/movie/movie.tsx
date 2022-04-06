@@ -29,13 +29,13 @@ function Movie(): JSX.Element {
     dispatch(fetchSimilarMoviesAction(selectedFilmId));
   }, [dispatch, selectedFilmId]);
 
-  if (!film || filmStatus === LoadingStatus.LOADING) {
+  if (!film || filmStatus === LoadingStatus.Loading) {
     return (
       <Loader />
     );
   }
 
-  if (filmStatus === LoadingStatus.FAILED) {
+  if (filmStatus === LoadingStatus.Failed) {
     return (
       <Error />
     );

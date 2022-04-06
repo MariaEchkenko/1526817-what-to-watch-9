@@ -31,13 +31,13 @@ function Main(): JSX.Element {
     : films.filter((film) => film.genre === activeGenre);
 
 
-  if (!promoFilm || filmsStatus === LoadingStatus.LOADING) {
+  if (!promoFilm || filmsStatus === LoadingStatus.Loading) {
     return (
       <Loader />
     );
   }
 
-  if (filmsStatus === LoadingStatus.FAILED || promoFilmStatus === LoadingStatus.FAILED) {
+  if (filmsStatus === LoadingStatus.Failed || promoFilmStatus === LoadingStatus.Failed) {
     return (
       <Error />
     );
