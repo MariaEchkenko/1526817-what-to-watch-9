@@ -40,8 +40,8 @@ export enum NameSpace {
 }
 
 export enum LoadingStatus {
-  IDLE = 'IDLE',
-  LOADING = 'LOADING',
-  SUCCEEDED = 'SUCCEEDED',
-  FAILED = 'FAILED',
+  Idle = 'IDLE',
+  Loading = 'LOADING',
+  Succeeded = 'SUCCEEDED',
+  Failed = 'FAILED',
 }

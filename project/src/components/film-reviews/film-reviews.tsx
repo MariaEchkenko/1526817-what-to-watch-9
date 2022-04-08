@@ -27,7 +27,7 @@ function FilmReviews({film}: FilmReviewsProps): JSX.Element {
   const reviewsFirstCol = reviews.slice(0, halfIndex);
   const reviewsSecondCol = reviews.slice(halfIndex, reviews.length);
 
-  if (reviewsStatus === LoadingStatus.LOADING) {
+  if (reviewsStatus === LoadingStatus.Loading) {
     return (
       <Loader />
     );

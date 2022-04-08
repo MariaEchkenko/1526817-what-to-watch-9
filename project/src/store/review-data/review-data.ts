@@ -5,6 +5,7 @@ import { Comment, Comments, userComment } from '../../types/comment';
 import { errorHandle } from '../../services/error-handle';
 import { redirectToRoute } from '../action';
 import { LoadingStatus, AppRoute, APIRoute, NameSpace } from '../../const';
+import { toast } from 'react-toastify';
 
 export const fetchReviewsAction = createAsyncThunk<Comments, number, {
   dispatch: AppDispatch,
@@ -35,7 +36,7 @@ export const sendUserReviewAction = createAsyncThunk<Comment, userComment, {
       dispatch(redirectToRoute(`${AppRoute.Film}/${id}`));
       return data;
     } catch (error) {
-      errorHandle(error);
+      toast.info('Something went wrong. Try again!');
       throw error;
     }
   },
@@ -44,8 +45,8 @@ export const sendUserReviewAction = createAsyncThunk<Comment, userComment, {
 const initialState: ReviewsData = {
   reviews: [],
   userReview: null,
-  reviewsStatus: LoadingStatus.IDLE,
-  reviewSendedStatus: LoadingStatus.IDLE,
+  reviewsStatus: LoadingStatus.Idle,
+  reviewSendedStatus: LoadingStatus.Idle,
 };
 
 export const reviewsData = createSlice({
@@ -55,24 +56,24 @@ export const reviewsData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchReviewsAction.pending, (state) => {
-        state.reviewsStatus = LoadingStatus.LOADING;
+        state.reviewsStatus = LoadingStatus.Loading;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        state.reviewsStatus = LoadingStatus.SUCCEEDED;
+        state.reviewsStatus = LoadingStatus.Succeeded;
       })
       .addCase(fetchReviewsAction.rejected, (state) => {
-        state.reviewsStatus = LoadingStatus.FAILED;
+        state.reviewsStatus = LoadingStatus.Failed;
       })
       .addCase(sendUserReviewAction.pending, (state) => {
-        state.reviewSendedStatus = LoadingStatus.LOADING;
+        state.reviewSendedStatus = LoadingStatus.Loading;
       })
       .addCase(sendUserReviewAction.fulfilled, (state, action) => {
         state.userReview = action.payload;
-        state.reviewSendedStatus = LoadingStatus.SUCCEEDED;
+        state.reviewSendedStatus = LoadingStatus.Succeeded;
       })
       .addCase(sendUserReviewAction.rejected, (state) => {
-        state.reviewSendedStatus = LoadingStatus.FAILED;
+        state.reviewSendedStatus = LoadingStatus.Failed;
       });
   },
 });
