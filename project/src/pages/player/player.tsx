@@ -62,7 +62,10 @@ function Player(): JSX.Element {
   const formatRunTime = () => {
     if (videoRef.current) {
       const runTime = videoRef.current.duration - currentTime;
-      return dayjs.duration(runTime, 'seconds').format('HH:mm:ss');
+      const format = dayjs.duration(runTime).asMinutes() > 60
+        ? '-HH:mm:ss'
+        : '-mm:ss';
+      return dayjs.duration(runTime, 'seconds').format(format);
     }
   };
 
@@ -75,10 +78,6 @@ function Player(): JSX.Element {
   if (!film) {
     return <Error />;
   }
-
-  /*if (loading) {
-    return <Loader />;
-  }*/
 
   return (
     <div className="player">
@@ -123,7 +122,7 @@ function Player(): JSX.Element {
               </svg>
               <span>{isActive ? 'Pause' : 'Play'}</span>
             </button>
-            <div className="player__name">Transpotting</div>
+            <div className="player__name">{film.name}</div>
 
             <button
               type="button"

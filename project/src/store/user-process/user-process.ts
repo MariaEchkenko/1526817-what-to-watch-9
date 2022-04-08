@@ -6,6 +6,7 @@ import { errorHandle } from '../../services/error-handle';
 import { AuthData } from '../../types/auth-data';
 import { UserData } from '../../types/user-data';
 import { saveToken, dropToken } from '../../services/token';
+import { saveAvatarUrl, dropAvatarUrl } from '../../services/avatar';
 import { redirectToRoute } from '../action';
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
@@ -33,8 +34,9 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
     try {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+      const {data: {token, avatarUrl}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
+      saveAvatarUrl(avatarUrl);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(redirectToRoute(AppRoute.Main));
     } catch (error) {
@@ -54,6 +56,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     try {
       await api.delete(APIRoute.Logout);
       dropToken();
+      dropAvatarUrl();
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     } catch (error) {
       errorHandle(error);
